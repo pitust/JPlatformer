@@ -2,5 +2,6 @@
 ## A simple platformer 4 fun
 This platformer uses processing.
 ### Authors
-1. pitust (Makefile, parts of java)
-2. booky10 (Assets)
+- pitust (Makefile, parts of java)
+- booky10/booky10-GitHub (Assets)
+- Darkhell666/Darkhell66659 (Level designer, platfom type inventor)
