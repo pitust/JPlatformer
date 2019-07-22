@@ -17,6 +17,8 @@ public class Main extends PApplet {
 
     public void setup() {
         bg = loadImage("bg.png");
+        fl = loadImage("playerLeft.png");
+        fr = loadImage("playerRight.png");
         a = new boolean[][] {
             // y:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
             new boolean[] { false, false, false, false, false }, // < 0 > :x
@@ -41,52 +43,55 @@ public class Main extends PApplet {
         fullScreen();
     }
     PImage bg;
+    PImage fl;
+    PImage fr;
     boolean[][] a;
     boolean b = true;
-    int plx = 0;
-    int ply = 0;
-    int vely = 0;
-    float velx = 0;
-    boolean isA = false;
-    boolean isD = false;
-    boolean isW = false;
+    int player_x = 0;
+    int player_y = 0;
+    int velocity_y = 0;
+    float velocity_x = 0;
+    boolean isAPressed = false;
+    boolean isDPressed = false;
+    boolean isWPressed = false;
+    boolean isPlFl = true;
     public void keyPressed() {
-        if (key == 'w') isW = true;
-        if (key == 'd') isD = true;
-        if (key == 'a') isA = true;
+        if (key == 'w') isWPressed = true;
+        if (key == 'd') isDPressed = true;
+        if (key == 'a') isAPressed = true;
     }
     public void keyReleased() {
-        if (key == 'w') isW = false;
-        if (key == 'd') isD = false;
-        if (key == 'a') isA = false;
+        if (key == 'w') isWPressed = false;
+        if (key == 'd') isDPressed = false;
+        if (key == 'a') isAPressed = false;
     }
     public void draw() {
-        if (isW && b) {
-            vely=15;
+        if (isWPressed && b) {
+            velocity_y=15;
             b = false;
         }
-        if (isA) {
-            velx-=7;
+        if (isAPressed) {
+            velocity_x-=7;
         }
-        if (isD) {
-            velx+=7;
+        if (isDPressed) {
+            velocity_x+=7;
         }
         image(bg, 0, 0, width, height);
-        vely--;
-        plx += (int)velx;
-        velx = velx / 2;
-        int pvy = height - ply + 100;
-        if (pvy / 50 > 0 && pvy / 50 < a.length && plx / 50 >= 0 && plx / 50 < a[pvy / 50].length) {
-            if (a[(pvy / 50) - 1][plx / 50] && vely < 0) {
-                vely=0;
+        velocity_y--;
+        player_x += (int)velocity_x;
+        velocity_x = velocity_x / 2;
+        int pvy = height - player_y + 100;
+        if (pvy / 50 > 0 && pvy / 50 < a.length && player_x / 50 >= 0 && player_x / 50 < a[pvy / 50].length) {
+            if (a[(pvy / 50) - 1][player_x / 50] && velocity_y < 0) {
+                velocity_y=0;
                 b = true;
-                ply -= 25;
-                ply = ply / 50;
-                ply = ply * 50;
-                ply += 32;
+                player_y -= 25;
+                player_y = player_y / 50;
+                player_y = player_y * 50;
+                player_y += 32;
             }
         }
-        ply -= vely;
+        player_y -= velocity_y;
         for (int x = 0;x < 38 && x < a.length;x++) {
             for (int y = 0;y < 21 && y < a[x].length;y++) {
                 if (a[y][x]) {
@@ -99,8 +104,13 @@ public class Main extends PApplet {
                 }
             }
         }
+        if (isPlFl) {
+            
+        } else {
+            
+        }
         fill(0);
-        circle(plx, ply + 25, 50);
+        circle(player_x, player_y + 25, 50);
     }
     public void drawBlock(String name, int x, int y) {
         image(loadImage(name + ".png"), x*50, height - y*50, 50, 50);
