@@ -1,6 +1,5 @@
 CLASSES := out/Main.class out/Entity.class
-CLASSNAMES := Main Entity
-CLASSFILENAMES := Main.class Entity.class
+CLASSFILENAMES := Main.class out/Entity.class
 build: main.jar
 
 main.jar: $(CLASSES) $(wildcard data/*)
