@@ -11,8 +11,3 @@ run: main.jar
 	java -Xdiag -cp ".\lib\pi.jar;main.jar" -Djava.library.path=".\lib" Main
 clean:
 	rm -rf out/*.class
-
-gen:
-	$(MAKE) -n build > build.bat
-	$(MAKE) -n run > run.bat
-	$(MAKE) -n clean > clean.bat
