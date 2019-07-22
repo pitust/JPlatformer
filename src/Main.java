@@ -3,7 +3,9 @@ import processing.data.*;
 import processing.event.*; 
 import processing.opengl.*; 
 
-import java.util.HashMap; 
+import java.util.HashMap;
+
+
 import java.util.ArrayList; 
 import java.io.File; 
 import java.io.BufferedReader; 
@@ -47,10 +49,12 @@ public class Main extends PApplet {
     PImage fr;
     boolean[][] a;
     boolean b = true;
-    int player_x = 0;
-    int player_y = 0;
-    int velocity_y = 0;
-    float velocity_x = 0;
+
+    public int player_x = 0;
+    public int player_y = 0;
+    public int velocity_y = 0;
+    public float velocity_x = 0;
+    
     boolean isAPressed = false;
     boolean isDPressed = false;
     boolean isWPressed = false;
@@ -72,9 +76,11 @@ public class Main extends PApplet {
         }
         if (isAPressed) {
             velocity_x-=7;
+            isPlFl = true;
         }
         if (isDPressed) {
             velocity_x+=7;
+            isPlFl = false;
         }
         image(bg, 0, 0, width, height);
         velocity_y--;
@@ -105,12 +111,10 @@ public class Main extends PApplet {
             }
         }
         if (isPlFl) {
-            
+            image(fl, player_x, player_y - 25, 50, 70);
         } else {
-            
+            image(fr, player_x, player_y - 25, 50, 70);
         }
-        fill(0);
-        circle(player_x, player_y + 25, 50);
     }
     public void drawBlock(String name, int x, int y) {
         image(loadImage(name + ".png"), x*50, height - y*50, 50, 50);

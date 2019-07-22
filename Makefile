@@ -1,9 +1,10 @@
-CLASSES := out/Main.class
-CLASSNAMES := Main
+CLASSES := out/Main.class out/Entity.class
+CLASSNAMES := Main Entity
+CLASSFILENAMES := Main.class Entity.class
 build: main.jar
 
 main.jar: $(CLASSES) $(wildcard data/*)
-	jar cvfe main.jar Main -C out/ Main.class
+	jar cvfe main.jar Main -C out/ $(CLASSFILENAMES)
 out/%.class: src/%.java
 	javac $< -d out -cp lib\pi.jar
 
