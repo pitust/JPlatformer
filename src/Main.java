@@ -16,7 +16,8 @@ public class Main extends PApplet {
 
     public void setup() {
         print("HI");
-        rect(0, 0, width, height);
+        I0 = loadImage("1.png");
+        bg = loadImage("bg.png");
     }
     static public void main(String[] passedArgs) {
       // It's just a stub, IDK what it does (IDK = I dont know)
@@ -29,5 +30,14 @@ public class Main extends PApplet {
     }
     public void settings() {
         fullScreen();
+    }
+    PImage I0;
+    PImage bg;
+    int x = 0;
+    int y = 0;
+    public void draw() {
+        image(bg, 0, 0, width, height);
+        image(I0, x*50, height - y*50, 50, 50);
+        y += 1;
     }
 }
