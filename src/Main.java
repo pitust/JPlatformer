@@ -52,12 +52,12 @@ public class Main extends PApplet {
     boolean isW = false;
     public void keyPressed() {
         if (key == 'w') isW = true;
-        if (key == 's') isS = true;
+        if (key == 'd') isD = true;
         if (key == 'a') isA = true;
     }
     public void keyReleased() {
         if (key == 'w') isW = false;
-        if (key == 's') isS = false;
+        if (key == 'd') isD = false;
         if (key == 'a') isA = false;
     }
     public void draw() {
