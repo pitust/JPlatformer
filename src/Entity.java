@@ -30,6 +30,9 @@ public class Entity {
     public int velocityY = 0;
     public float velocityX = 0;
     public boolean onGround = false;
+    public void init() {
+        
+    }
     public void redraw() {
         velocityY--;
         entityX += (int)velocityX;
