@@ -16,7 +16,6 @@ import java.util.*;
 public class Main extends PApplet {
 
     public void setup() {
-        print("HI");
         bg = loadImage("bg.png");
         a = new boolean[][] {
             // y:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
@@ -24,8 +23,10 @@ public class Main extends PApplet {
             new boolean[] { false, false, false, false, false }, // < 1 > :x
             new boolean[] { false, false, false, false, false }, // < 2 > :x
             new boolean[] { false,  true,  true,  true, false }, // < 3 > :x
-            new boolean[] { false,  true,  true, false, false }, // < 4 > :x
+            new boolean[] { false, false, false, false, false }, // < 4 > :x
         };
+        println(width/50);
+        println(height/50);
     }
     static public void main(String[] passedArgs) {
       // It's just a stub, IDK what it does (IDK = I dont know)
@@ -41,26 +42,65 @@ public class Main extends PApplet {
     }
     PImage bg;
     boolean[][] a;
+    boolean b = true;
+    int plx = 0;
+    int ply = 0;
+    int vely = 0;
+    float velx = 0;
+    boolean isA = false;
+    boolean isD = false;
+    boolean isW = false;
+    public void keyPressed() {
+        if (key == 'w') isW = true;
+        if (key == 's') isS = true;
+        if (key == 'a') isA = true;
+    }
+    public void keyReleased() {
+        if (key == 'w') isW = false;
+        if (key == 's') isS = false;
+        if (key == 'a') isA = false;
+    }
     public void draw() {
+        if (isW && b) {
+            vely=15;
+            b = false;
+        }
+        if (isA) {
+            velx-=7;
+        }
+        if (isD) {
+            velx+=7;
+        }
         image(bg, 0, 0, width, height);
-        for (int x = 0;x < 5;x++) {
-            for (int y = 0;y < 5;y++) {
+        vely--;
+        plx += (int)velx;
+        velx = velx / 2;
+        int pvy = height - ply + 100;
+        if (pvy / 50 > 0 && pvy / 50 < a.length && plx / 50 >= 0 && plx / 50 < a[pvy / 50].length) {
+            if (a[(pvy / 50) - 1][plx / 50] && vely < 0) {
+                vely=0;
+                b = true;
+                ply -= 25;
+                ply = ply / 50;
+                ply = ply * 50;
+                ply += 32;
+            }
+        }
+        ply -= vely;
+        for (int x = 0;x < 38 && x < a.length;x++) {
+            for (int y = 0;y < 21 && y < a[x].length;y++) {
                 if (a[y][x]) {
                     boolean isTop = (y - 1 < 0) || !a[y - 1][x];
-                    boolean isBottom = (y + 1 >= 5) || !a[y + 1][x];
+                    boolean isBottom = (y + 1 >= 21) || !a[y + 1][x];
                     boolean isLeft = (x - 1 < 0) || !a[y][x - 1];
-                    boolean isRight = (x + 1 >= 5) || !a[y][x + 1];
+                    boolean isRight = (x + 1 >= 38) || !a[y][x + 1];
                     String nm = getNameForDirt(isTop, isLeft, isRight, isBottom);
-                    print("X: ");
-                    print(x);
-                    print(" Y: ");
-                    print(y);
-                    print(" Name: ");
-                    println(nm);
                     drawBlock(nm, x, 5 - y);
                 }
             }
         }
+        fill(0);
+        circle(plx, ply + 25, 50);
     }
     public void drawBlock(String name, int x, int y) {
         image(loadImage(name + ".png"), x*50, height - y*50, 50, 50);
