@@ -26,7 +26,7 @@ public class Util {
     }
 
     public static int gridY(int y) {
-        return level.length - ((y + 50) / 50);
+        return y / 50;
     }
 
     public static int globX(int x) {
@@ -34,6 +34,6 @@ public class Util {
     }
 
     public static int globY(int y) {
-        return 0 - (50 * y) - (50 * level.length) + 450;
+        return y * 50;
     }
 }
