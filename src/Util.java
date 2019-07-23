@@ -22,7 +22,7 @@ public class Util {
     public static boolean[][] level;
 
     public static int gridX(int x) {
-        return x  / 50;
+        return x / 50;
     }
 
     public static int gridY(int y) {

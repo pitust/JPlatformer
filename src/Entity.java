@@ -41,11 +41,13 @@ public class Entity {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY < 0) {
                 velocityY=0;
                 onGround = true;
-                entityY -= 25;
-                entityY = entityY / 50;
-                entityY = entityY * 50;
-                entityY += 32;
             } else onGround = false;
+            app.fill(0);
+            app.rect(0,0,20,20);
+            app.print("H ");
+            app.print(Util.gridX(entityX));
+            app.print(" ");
+            app.println(Util.gridY(entityY));
         } else onGround = false;
         entityY -= velocityY;
     }

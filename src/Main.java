@@ -30,9 +30,9 @@ public class Main extends PApplet {
             "portal5.png"
         });
         a = new boolean[][] {
-                // x: < 0 > < 1 > < 2 > < 3 > < 4 >
+                // x:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
                 new boolean[] { false, false, false, false, false }, // < 0 > :y
-                new boolean[] { false, false, false, true, false }, // < 1 > :y
+                new boolean[] { false, false, false,  true, false }, // < 1 > :y
                 new boolean[] { false, false, false, false, false }, // < 2 > :y
                 new boolean[] { false,  true,  true, false, false }, // < 3 > :y
                 new boolean[] { false, false, false, false, false }, // < 4 > :y
@@ -99,8 +99,8 @@ public class Main extends PApplet {
                 if (a[y][x]) {
                     boolean isTop = (y - 1 < 0) || !a[y - 1][x];
                     boolean isBottom = (y + 1 >= a.length) || !a[y + 1][x];
-                    boolean isLeft = (x - 1 < 0) || a[y][x - 1];
-                    boolean isRight = (x + 1 >= a[y].length) || a[y][x + 1];
+                    boolean isLeft = (x - 1 < 0) || !a[y][x - 1];
+                    boolean isRight = (x + 1 >= a[y].length) || !a[y][x + 1];
                     String nm = getNameForDirt(isTop, isLeft, isRight, isBottom);
                     drawBlock(nm, x, y);
                 }
@@ -127,7 +127,7 @@ public class Main extends PApplet {
     }
 
     public void drawBlock(String name, int x, int y) {
-        image(loadImage(name + ".png"), Util.globY(x), Util.globY(y), 50, 50);
+        image(loadImage(name + ".png"), Util.globX(x), Util.globY(y), 50, 50);
     }
 
     public String getNameForDirt(boolean isTop, boolean isLeft, boolean isRight, boolean isBottom) {
