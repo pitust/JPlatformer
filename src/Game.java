@@ -30,6 +30,7 @@ public class Game {
         this.app = app;
     }
     boolean nonce = false;
+    ArrayList<Item> items = new ArrayList<Item>();
     public void setup() {
         bg = app.loadImage("bg.png");
         fl = app.loadImage("playerLeft.png");
@@ -38,6 +39,7 @@ public class Game {
                 "portal5.png" });
         // Auto-gen, use <Z>export
         // TODO: add a auto/Levels.java file
+        items.add(new Coin(10, 10));
         level = new boolean[][] {
                 new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
                         false, false, false, false, false, false, false, false, false },
@@ -186,6 +188,9 @@ public class Game {
                     drawBlock(nm, x, y);
                 }
             }
+        }
+        for(int i = 0; i < items.size();i++){
+            items.get(i).draw(app);
         }
         f.draw(30, 30, 50, 50);
         p.redraw();

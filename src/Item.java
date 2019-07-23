@@ -1,10 +1,17 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
 public class Item {
-    int durability; // Any positive Value:
     int x;
     int y;
-    void draw() {}
-    public Item(int xpos, int ypos) {
+    String texturename;
+    void draw(PApplet applet) {
+        PImage texture = applet.loadImage(texturename);
+        applet.image(texture, x, y);
+    }
+    public Item(int xpos, int ypos, String name) {
         x = xpos;
         y = ypos;
+        texturename = name;
     }
 }
