@@ -1,5 +1,5 @@
-CLASSES := out/Util.class out/Entity.class out/Player.class out/Frames.class out/Main.class
-CLASSFILENAMES := Main.class out/Entity.class out/Player.class out/Util.class out/Frames.class
+CLASSES := out/Util.class out/Entity.class out/Player.class out/Frames.class out/Game.class out/Main.class
+CLASSFILENAMES := Main.class out/Entity.class out/Player.class out/Util.class out/Frames.class out/Game.class
 build: main.jar
 
 main.jar: $(CLASSES)
