@@ -21,7 +21,7 @@ public class Player extends Entity {
     public void redraw() {
         super.redraw();
         if (isWPressed && onGround) {
-            velocityY=15;
+            velocityY+=15;
             onGround = false;
         }
         if (isAPressed) {
