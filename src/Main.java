@@ -1,41 +1,53 @@
-import processing.core.*; 
-import processing.data.*; 
-import processing.event.*; 
-import processing.opengl.*; 
+import processing.core.*;
+import processing.data.*;
+import processing.event.*;
+import processing.opengl.*;
 
 import java.util.HashMap;
 
-
-import java.util.ArrayList; 
-import java.io.File; 
-import java.io.BufferedReader; 
-import java.io.PrintWriter; 
-import java.io.InputStream; 
-import java.io.OutputStream; 
-import java.io.IOException; 
-import java.util.*; 
+import java.util.ArrayList;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
+import java.util.*;
 
 public class Main extends PApplet {
     Player p;
+    Frames f;
     public void setup() {
         bg = loadImage("bg.png");
         fl = loadImage("playerLeft.png");
         fr = loadImage("playerRight.png");
+        f = new Frames(this, new String[] {
+            "portal0.png",
+            "portal1.png",
+            "portal2.png",
+            "portal3.png",
+            "portal4.png",
+            "portal5.png"
+        });
         a = new boolean[][] {
-            // y:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
-            new boolean[] { false, false, false, false, false }, // < 0 > :x
-            new boolean[] { false, false, false, false, false }, // < 1 > :x
-            new boolean[] { false, false, false, false, false }, // < 2 > :x
-            new boolean[] { false,  true,  true,  true, false }, // < 3 > :x
-            new boolean[] { false, false, false, false, false }, // < 4 > :x
+                // x: < 0 > < 1 > < 2 > < 3 > < 4 >
+                new boolean[] { false, false, false, false, false }, // < 0 > :y
+                new boolean[] { false, false, false, true, false }, // < 1 > :y
+                new boolean[] { false, false, false, false, false }, // < 2 > :y
+                new boolean[] { false,  true,  true, false, false }, // < 3 > :y
+                new boolean[] { false, false, false, false, false }, // < 4 > :y
         };
         p = new Player(this, a);
         p.init();
-        println(width/50);
-        println(height/50);
+        println(width / 50);
+        println(height / 50);
+        frameRate(60);
+        Util.app = this;
+        Util.level = a;
     }
+
     static public void main(String[] passedArgs) {
-      // It's just a stub, IDK what it does (IDK = I dont know)
+        // It's just a stub, IDK what it does (IDK = I dont know)
         String[] appletArgs = new String[] { "--window-color=#666666", "Main" };
         if (passedArgs != null) {
             PApplet.main(concat(appletArgs, passedArgs));
@@ -43,9 +55,11 @@ public class Main extends PApplet {
             PApplet.main(appletArgs);
         }
     }
+
     public void settings() {
         fullScreen();
     }
+
     PImage bg;
     PImage fl;
     PImage fr;
@@ -56,40 +70,68 @@ public class Main extends PApplet {
     public int player_y = 0;
     public int velocity_y = 0;
     public float velocity_x = 0;
-    
-    boolean isAPressed = false;
-    boolean isDPressed = false;
-    boolean isWPressed = false;
-    boolean isPlFl = true;
+
+    boolean nonce = false;
+
     public void keyPressed() {
-        if (key == 'w') p.isWPressed = true;
-        if (key == 'd') p.isDPressed = true;
-        if (key == 'a') p.isAPressed = true;
+        if (key == 'w')
+            p.isWPressed = true;
+        if (key == 'd')
+            p.isDPressed = true;
+        if (key == 'a')
+            p.isAPressed = true;
     }
+
     public void keyReleased() {
-        if (key == 'w') p.isWPressed = false;
-        if (key == 'd') p.isDPressed = false;
-        if (key == 'a') p.isAPressed = false;
+        if (key == 'w')
+            p.isWPressed = false;
+        if (key == 'd')
+            p.isDPressed = false;
+        if (key == 'a')
+            p.isAPressed = false;
     }
+
     public void draw() {
         image(bg, 0, 0, width, height);
-        for (int x = 0;x < 38 && x < a.length;x++) {
-            for (int y = 0;y < 21 && y < a[x].length;y++) {
+        for (int y = 0; y < 21 && y < a.length; y++) {
+            for (int x = 0; x < 38 && x < a[y].length; x++) {
                 if (a[y][x]) {
                     boolean isTop = (y - 1 < 0) || !a[y - 1][x];
-                    boolean isBottom = (y + 1 >= 21) || !a[y + 1][x];
+                    boolean isBottom = (y + 1 >= a.length) || !a[y + 1][x];
                     boolean isLeft = (x - 1 < 0) || !a[y][x - 1];
-                    boolean isRight = (x + 1 >= 38) || !a[y][x + 1];
+                    boolean isRight = (x + 1 >= a[y].length) || !a[y][x + 1];
                     String nm = getNameForDirt(isTop, isLeft, isRight, isBottom);
-                    drawBlock(nm, x, 5 - y);
+                    drawBlock(nm, x, y);
                 }
             }
         }
+        f.draw(30, 30, 50, 50);
         p.redraw();
+        int xa = mouseX / 50;
+        int ya = (mouseY - height) / 50;
+        xa *= 50;
+        ya *= 50;
+        ya += height - 50;
+        stroke(0);
+        fill(0,0,0,0);
+        rect(xa, ya, 50, 50);
+        if (mousePressed && !nonce) {
+            ya = Util.gridY(mouseY);
+            xa = Util.gridY(mouseX);
+            print(xa);
+            print(" ");
+            println(ya);
+            if (ya >= 0 && ya < a.length && xa >= 0 && xa < a[ya].length)
+                a[ya][xa] = !a[ya][xa];
+            nonce = true;
+        } else
+            nonce = mousePressed;
     }
+
     public void drawBlock(String name, int x, int y) {
-        image(loadImage(name + ".png"), x*50, height - y*50, 50, 50);
+        image(loadImage(name + ".png"), Util.globY(x), Util.globY(y), 50, 50);
     }
+
     public String getNameForDirt(boolean isTop, boolean isLeft, boolean isRight, boolean isBottom) {
         String s = "dirt";
         if (isTop) {

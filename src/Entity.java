@@ -31,15 +31,14 @@ public class Entity {
     public float velocityX = 0;
     public boolean onGround = false;
     public void init() {
-        
+
     }
     public void redraw() {
         velocityY--;
         entityX += (int)velocityX;
         velocityX = velocityX / 2;
-        int gridy = app.height - entityY + 100;
-        if (gridy / 50 > 0 && gridy / 50 < cur_level.length && entityX / 50 >= 0 && entityX / 50 < cur_level[gridy / 50].length) {
-            if (cur_level[(gridy / 50) - 1][entityX / 50] && velocityY < 0) {
+        if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
+            if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY < 0) {
                 velocityY=0;
                 onGround = true;
                 entityY -= 25;
