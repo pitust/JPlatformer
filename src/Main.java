@@ -30,7 +30,7 @@ public class Main extends PApplet {
             "portal5.png"
         });
         a = new boolean[][] {
-                // x:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
+                // x:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >  < 5 >  < 6 >  < 7 >
                 new boolean[] { false, false, false, false, false, false, false, false }, // < 0 > :y
                 new boolean[] { false, false, false,  true, false, false, false, false }, // < 1 > :y
                 new boolean[] { false, false, false, false, false, false, false, false }, // < 2 > :y
