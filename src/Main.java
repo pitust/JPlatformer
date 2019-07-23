@@ -3,7 +3,9 @@ import processing.data.*;
 import processing.event.*; 
 import processing.opengl.*; 
 
-import java.util.HashMap; 
+import java.util.HashMap;
+
+
 import java.util.ArrayList; 
 import java.io.File; 
 import java.io.BufferedReader; 
@@ -14,7 +16,7 @@ import java.io.IOException;
 import java.util.*; 
 
 public class Main extends PApplet {
-
+    Player p;
     public void setup() {
         bg = loadImage("bg.png");
         fl = loadImage("playerLeft.png");
@@ -27,6 +29,8 @@ public class Main extends PApplet {
             new boolean[] { false,  true,  true,  true, false }, // < 3 > :x
             new boolean[] { false, false, false, false, false }, // < 4 > :x
         };
+        p = new Player(this, a);
+        p.init();
         println(width/50);
         println(height/50);
     }
@@ -47,51 +51,28 @@ public class Main extends PApplet {
     PImage fr;
     boolean[][] a;
     boolean b = true;
-    int player_x = 0;
-    int player_y = 0;
-    int velocity_y = 0;
-    float velocity_x = 0;
+
+    public int player_x = 0;
+    public int player_y = 0;
+    public int velocity_y = 0;
+    public float velocity_x = 0;
+    
     boolean isAPressed = false;
     boolean isDPressed = false;
     boolean isWPressed = false;
     boolean isPlFl = true;
     public void keyPressed() {
-        if (key == 'w') isWPressed = true;
-        if (key == 'd') isDPressed = true;
-        if (key == 'a') isAPressed = true;
+        if (key == 'w') p.isWPressed = true;
+        if (key == 'd') p.isDPressed = true;
+        if (key == 'a') p.isAPressed = true;
     }
     public void keyReleased() {
-        if (key == 'w') isWPressed = false;
-        if (key == 'd') isDPressed = false;
-        if (key == 'a') isAPressed = false;
+        if (key == 'w') p.isWPressed = false;
+        if (key == 'd') p.isDPressed = false;
+        if (key == 'a') p.isAPressed = false;
     }
     public void draw() {
-        if (isWPressed && b) {
-            velocity_y=15;
-            b = false;
-        }
-        if (isAPressed) {
-            velocity_x-=7;
-        }
-        if (isDPressed) {
-            velocity_x+=7;
-        }
         image(bg, 0, 0, width, height);
-        velocity_y--;
-        player_x += (int)velocity_x;
-        velocity_x = velocity_x / 2;
-        int pvy = height - player_y + 100;
-        if (pvy / 50 > 0 && pvy / 50 < a.length && player_x / 50 >= 0 && player_x / 50 < a[pvy / 50].length) {
-            if (a[(pvy / 50) - 1][player_x / 50] && velocity_y < 0) {
-                velocity_y=0;
-                b = true;
-                player_y -= 25;
-                player_y = player_y / 50;
-                player_y = player_y * 50;
-                player_y += 32;
-            }
-        }
-        player_y -= velocity_y;
         for (int x = 0;x < 38 && x < a.length;x++) {
             for (int y = 0;y < 21 && y < a[x].length;y++) {
                 if (a[y][x]) {
@@ -104,13 +85,7 @@ public class Main extends PApplet {
                 }
             }
         }
-        if (isPlFl) {
-            
-        } else {
-            
-        }
-        fill(0);
-        circle(player_x, player_y + 25, 50);
+        p.redraw();
     }
     public void drawBlock(String name, int x, int y) {
         image(loadImage(name + ".png"), x*50, height - y*50, 50, 50);
