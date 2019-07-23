@@ -34,7 +34,6 @@ public class Util {
     }
 
     public static int globY(int y) {
-        text("Hi", 10, 10, 10);
         return y * 50;
     }
     public static void text(String s, int x, int y, int w) {

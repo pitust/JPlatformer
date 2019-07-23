@@ -202,6 +202,7 @@ public class Game {
             nonce = true;
         } else
             nonce = app.mousePressed;
+        Util.text("Hi", 10, 10, 10);
     }
     void drawBlock(String name, int x, int y) {
         app.image(app.loadImage(name + ".png"), Util.globX(x), Util.globY(y), 50, 50);
