@@ -34,6 +34,13 @@ public class Util {
     }
 
     public static int globY(int y) {
+        text("Hi", 10, 10, 10);
         return y * 50;
+    }
+    public static void text(String s, int x, int y, int w) {
+        int ld = s.length() / w;
+        for (int i = 0;i < s.length();i++) {
+            app.image(app.loadImage("8bit" + Character.toString(s.charAt(i)).toUpperCase() +  ".png"), x + ld * i, y, ld, ld);
+        }
     }
 }

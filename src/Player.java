@@ -48,8 +48,8 @@ public class Player extends Entity {
     boolean isPlFl = true;
 
     public void init() {
-        fl = app.loadImage("playerLeft.jpg");
-        fr = app.loadImage("playerRight.jpg");
+        fl = app.loadImage("playerLeft.jpeg");
+        fr = app.loadImage("playerRight.jpeg");
     }
 
     public Player(PApplet p, boolean[][] level) {
