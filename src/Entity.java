@@ -41,10 +41,6 @@ public class Entity {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY < 0) {
                 velocityY=0;
                 onGround = true;
-                entityY -= 25;
-                entityY = entityY / 50;
-                entityY = entityY * 50;
-                entityY += 32;
             } else onGround = false;
         } else onGround = false;
         entityY -= velocityY;
