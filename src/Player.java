@@ -1,25 +1,11 @@
 import processing.core.*;
-import processing.data.*;
-import processing.event.*;
-import processing.opengl.*;
-
-import java.util.HashMap;
-
-import java.util.ArrayList;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.*;
 
 /**
  * Player
  */
 public class Player extends Entity {
-    public void redraw() {
-        super.redraw();
+    public void draw(PApplet app) {
+        super.draw(app);
         if (isWPressed && onGround) {
             velocityY = 30;
             onGround = false;
@@ -47,12 +33,12 @@ public class Player extends Entity {
     PImage fr;
     boolean isPlFl = true;
 
-    public void init() {
+    public void init(PApplet app) {
         fl = app.loadImage("playerLeft.png");
         fr = app.loadImage("playerRight.png");
     }
 
-    public Player(PApplet p, boolean[][] level) {
-        super(p, level);
+    public Player(boolean[][] level) {
+        super(level);
     }
 }

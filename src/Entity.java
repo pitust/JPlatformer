@@ -17,13 +17,11 @@ import java.util.*;
 /**
  * Entity
  */
-public class Entity {
+public class Entity implements Drawable{
 
-    PApplet app;
     boolean[][] cur_level;
 
-    public Entity(PApplet p, boolean[][] level) {
-        app = p;
+    public Entity(boolean[][] level) {
         this.cur_level = level;
     }
 
@@ -33,13 +31,13 @@ public class Entity {
     public float velocityX = 0;
     public boolean onGround = false;
 
-    public void init() {
+    public void init(PApplet app) {
 
     }
 
-    public void redraw() {
+    public void draw(PApplet app) {
         velocityY -= 3;
-        velocityY = app.max(app.min(velocityY, 20), -20);
+        velocityY = Math.max(Math.min(velocityY, 20), -20);
         entityX += (int) velocityX;
         velocityX = (int)(velocityX / 1.1);
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0

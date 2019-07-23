@@ -1,11 +1,11 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Item {
+public class Item implements Drawable {
     int x;
     int y;
     String texturename;
-    void draw(PApplet applet) {
+    public void draw(PApplet applet) {
         PImage texture = applet.loadImage(texturename);
         applet.image(texture, x, y);
     }
