@@ -31,12 +31,17 @@ public class Main extends PApplet {
         });
         a = new boolean[][] {
                 // x:           < 0 >  < 1 >  < 2 >  < 3 >  < 4 >
-                new boolean[] { false, false, false, false, false }, // < 0 > :y
-                new boolean[] { false, false, false,  true, false }, // < 1 > :y
-                new boolean[] { false, false, false, false, false }, // < 2 > :y
-                new boolean[] { false,  true,  true, false, false }, // < 3 > :y
-                new boolean[] { false, false, false, false, false }, // < 4 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 0 > :y
+                new boolean[] { false, false, false,  true, false, false, false, false }, // < 1 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 2 > :y
+                new boolean[] { false,  true,  true, false, false, false, false, false }, // < 3 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 4 > :y
+                new boolean[] { false, false, false,  true, false, false, false, false }, // < 5 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 6 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 7 > :y
+                new boolean[] { false, false, false, false, false, false, false, false }, // < 8 > :y
         };
+
         p = new Player(this, a);
         p.init();
         println(width / 50);
@@ -101,7 +106,7 @@ public class Main extends PApplet {
                     boolean isBottom = (y + 1 >= a.length) || !a[y + 1][x];
                     boolean isLeft = (x - 1 < 0) || !a[y][x - 1];
                     boolean isRight = (x + 1 >= a[y].length) || !a[y][x + 1];
-                    String nm = getNameForDirt(isTop, isLeft, isRight, isBottom);
+                    String nm = getNameForDirt(isBottom, isLeft, isRight, isTop);
                     drawBlock(nm, x, y);
                 }
             }
@@ -115,7 +120,7 @@ public class Main extends PApplet {
         rect(xa, ya, 50, 50);
         if (mousePressed && !nonce) {
             ya = Util.gridY(mouseY);
-            xa = Util.gridY(mouseX);
+            xa = a[ya].length - Util.gridY(mouseX) - 1;
             print(xa);
             print(" ");
             println(ya);

@@ -42,12 +42,6 @@ public class Entity {
                 velocityY=0;
                 onGround = true;
             } else onGround = false;
-            app.fill(0);
-            app.rect(0,0,20,20);
-            app.print("H ");
-            app.print(Util.gridX(entityX));
-            app.print(" ");
-            app.println(Util.gridY(entityY));
         } else onGround = false;
         entityY -= velocityY;
     }
