@@ -47,6 +47,8 @@ public class Entity {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY < 0) {
                 velocityY = 0;
                 onGround = true;
+                velocityX *= 2;
+                velocityX /= 3;
             } else
                 onGround = false;
         } else
