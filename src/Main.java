@@ -44,6 +44,7 @@ public class Main extends PApplet {
         frameRate(60);
         Util.app = this;
         Util.level = a;
+        println(Util.globX(Util.gridX(100)));
     }
 
     static public void main(String[] passedArgs) {
@@ -98,8 +99,8 @@ public class Main extends PApplet {
                 if (a[y][x]) {
                     boolean isTop = (y - 1 < 0) || !a[y - 1][x];
                     boolean isBottom = (y + 1 >= a.length) || !a[y + 1][x];
-                    boolean isLeft = (x - 1 < 0) || !a[y][x - 1];
-                    boolean isRight = (x + 1 >= a[y].length) || !a[y][x + 1];
+                    boolean isLeft = (x - 1 < 0) || a[y][x - 1];
+                    boolean isRight = (x + 1 >= a[y].length) || a[y][x + 1];
                     String nm = getNameForDirt(isTop, isLeft, isRight, isBottom);
                     drawBlock(nm, x, y);
                 }
@@ -107,11 +108,8 @@ public class Main extends PApplet {
         }
         f.draw(30, 30, 50, 50);
         p.redraw();
-        int xa = mouseX / 50;
-        int ya = (mouseY - height) / 50;
-        xa *= 50;
-        ya *= 50;
-        ya += height - 50;
+        int xa = Util.globX(Util.gridX(mouseX));
+        int ya = Util.globY(Util.gridY(mouseY));
         stroke(0);
         fill(0,0,0,0);
         rect(xa, ya, 50, 50);
