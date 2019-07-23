@@ -4,4 +4,5 @@ This platformer uses processing.
 ### Authors
 - pitust (Makefile, parts of java)
 - booky10/booky10-GitHub (Assets)
-- Darkhell666/Darkhell66659 (Level designer, platfom type inventor)
+- Darkhell666/Darkhell66659 (Level designer, platform type inventor)
+- Herguent (Level designer)
