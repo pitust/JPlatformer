@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="pi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/pi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
