@@ -206,7 +206,7 @@ public class Game {
     void drawBlock(String name, int x, int y) {
         app.image(app.loadImage(name + ".png"), Util.globX(x), Util.globY(y), 50, 50);
     }
-    String getNameForDirt(boolean isTop, boolean isLeft, boolean isRight, boolean isBottom) {
+    String getNameForDirt(boolean isBottom, boolean isLeft, boolean isRight, boolean isTop) {
         String s = "dirt";
         if (isTop) {
             s = "grass";
