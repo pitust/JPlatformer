@@ -17,11 +17,13 @@ import java.util.*;
 /**
  * Entity
  */
-public class Entity implements Drawable{
+public class Entity {
 
+    PApplet app;
     boolean[][] cur_level;
 
-    public Entity(boolean[][] level) {
+    public Entity(PApplet p, boolean[][] level) {
+        app = p;
         this.cur_level = level;
     }
 
@@ -31,21 +33,24 @@ public class Entity implements Drawable{
     public float velocityX = 0;
     public boolean onGround = false;
 
-    public void init(PApplet app) {
+    public void init() {
 
     }
 
-    public void draw(PApplet app) {
+    public void redraw() {
         velocityY -= 3;
-        velocityY = Math.max(Math.min(velocityY, 20), -20);
-        entityX += (int) velocityX;
+        velocityY = app.max(app.min(velocityY, 49), -49);
+        velocityX = app.max(app.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
+        entityX += (int) velocityX;
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    entityY -= 5;
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    int i = (int)(app.abs(velocityX) / velocityX);
+                    entityX -= velocityX + i * 2;
+                    velocityX = 0;
                 }
                 velocityY = 0;
                 onGround = true;
