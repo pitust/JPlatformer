@@ -35,10 +35,10 @@ public class Entity {
 
     }
 
-    public void redraw() {
-        velocityY -= 6;
-        velocityY = app.max(app.min(velocityY, 49), -49);
-        velocityX = app.max(app.min(velocityX, 49), -49);
+    public void redraw(PApplet app) {
+        velocityY -= 3;
+        velocityY = Math.max(Math.min(velocityY, 49), -49);
+        velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
         entityX += (int) velocityX;
         
@@ -53,8 +53,8 @@ public class Entity {
                 return;
             }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level.length > Util.gridY(entityY) - 1 && (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) + 1 && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1]) || (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)])) {
-                    int i = (int)(app.abs(velocityX) / velocityX);
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    int i = (int)(Math.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }

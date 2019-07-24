@@ -11,6 +11,7 @@ public class Game {
     PImage facingRight;
     Player player;
     Frames portal;
+    EightBitText EBT;
     public Game(PApplet app) {
         this.app = app;
         this.EBT = new EightBitText(this.app);
@@ -26,8 +27,8 @@ public class Game {
 
         level = Level.ELEVATORTEST.getLevel();
 
-        player = new Player(app, level);
-        player.init();
+        player = new Player(level);
+        player.init(app);
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
@@ -104,7 +105,7 @@ public class Game {
                 app.image(EBTtxt[i], i * 10, 30);
             }
         }
-        player.redraw();
+        player.redraw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);
