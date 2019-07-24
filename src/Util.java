@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class Util {
     public static PApplet app;
-    public static boolean[][] level;
+    public static Blocks[][] level;
     public static boolean isDead = false;
     public static EightBitText EBT;
     public static int gridX(int x) {

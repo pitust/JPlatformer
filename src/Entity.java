@@ -19,9 +19,9 @@ import java.util.*;
  */
 public class Entity {
 
-    boolean[][] cur_level;
+    Blocks[][] cur_level;
 
-    public Entity(boolean[][] level) {
+    public Entity(Blocks[][] level) {
         this.cur_level = level;
     }
 
@@ -44,15 +44,15 @@ public class Entity {
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
-            if (cur_level[Util.gridY(entityY - 40)][Util.gridX(entityX)]) {
+            if (cur_level[Util.gridY(entityY - 40)][Util.gridX(entityX)] != Blocks.AIR) {
                 int i = (int)(app.abs(velocityX) / velocityX);
                 entityX -= velocityX + -i * 2 * (Util.globX(Util.gridX(entityX)) - entityX);
                 velocityX = 0;
                 entityY -= velocityY;
                 return;
             }
-            if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+            if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] != Blocks.AIR && velocityY <= 0) {
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] != Blocks.AIR || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)] != Blocks.AIR) {
                     int i = (int)(Math.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;

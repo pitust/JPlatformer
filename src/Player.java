@@ -53,7 +53,7 @@ public class Player extends Entity {
         fr = app.loadImage("playerRight.png");
     }
 
-    public Player(boolean[][] level) {
+    public Player(Blocks[][] level) {
         super( level);
     }
 }

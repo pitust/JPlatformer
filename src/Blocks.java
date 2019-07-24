@@ -26,7 +26,7 @@ public enum Blocks {
             case TARGETFLAG:
                 return "targetFlag.png";
             default:
-                return null;
+                return this.toString();
         }
     }
 
@@ -49,15 +49,5 @@ public enum Blocks {
             return dirt;
         } else
             return null;
-    }
-
-    public Frames getFrames(PApplet app) {
-        switch (this) {
-            case PORTAL:
-                return new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
-                        "portal5.png" });
-                default:
-                    return null;
-        }
     }
 }
