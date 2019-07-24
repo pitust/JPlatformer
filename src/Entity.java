@@ -1,5 +1,5 @@
 import processing.core.*;
-import java.lang.*;
+import java.lang.Math;
 
 /**
  * Entity
