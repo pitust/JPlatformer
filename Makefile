@@ -1,5 +1,5 @@
-CLASSES := out/Util.class out/Entity.class out/Player.class out/Frames.class out/Level.class out/EightBitText.class out/Game.class out/Main.class
-CLASSFILENAMES := Main.class out/Entity.class out/Player.class out/Util.class out/Frames.class out/EightBitText.class out/Game.class out/Level.class 'out/Level$$1.class'
+CLASSES := out/Util.class out/Blocks.class out/Entity.class out/Player.class out/Frames.class out/Level.class out/EightBitText.class out/Game.class out/Main.class
+CLASSFILENAMES := Main.class out/Entity.class out/Player.class out/Util.class out/Blocks.class out/Frames.class out/EightBitText.class out/Game.class out/Level.class 'out/Level$$1.class'
 build: main.jar
 
 main.jar: $(CLASSES)
