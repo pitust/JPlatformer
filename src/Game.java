@@ -25,9 +25,11 @@ public class Game {
     PImage fr;
     Player p;
     Frames f;
+    EightBitText EBT;
     boolean b = true;
     public Game(PApplet app) {
         this.app = app;
+        this.EBT = new EightBitText(this.app);
     }
     boolean nonce = false;
     public void setup() {
@@ -40,8 +42,8 @@ public class Game {
 
         level = Level.ELEVATORTEST.getLevel();
 
-        p = new Player(app, level);
-        p.init();
+        p = new Player(level);
+        p.init(app);
         app.println(app.width / 50);
         app.println(app.height / 50);
         app.frameRate(60);
@@ -113,7 +115,15 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        p.redraw();
+        p.redraw(app);
+        PImage[] EBTtxt = EBT.eBitTxt("Use WASD keys to move");
+        for(int i = 0; i<EBTtxt.length; i++)
+        {
+            if(EBTtxt[i] != null) {
+                app.image(EBTtxt[i], i * 10, 30);
+            }
+        }
+        app.draw();
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);

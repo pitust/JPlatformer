@@ -19,11 +19,9 @@ import java.util.*;
  */
 public class Entity {
 
-    PApplet app;
     boolean[][] cur_level;
 
-    public Entity(PApplet p, boolean[][] level) {
-        app = p;
+    public Entity(boolean[][] level) {
         this.cur_level = level;
     }
 
@@ -33,14 +31,14 @@ public class Entity {
     public float velocityX = 0;
     public boolean onGround = false;
 
-    public void init() {
+    public void init(PApplet app) {
 
     }
 
-    public void redraw() {
+    public void redraw(PApplet app) {
         velocityY -= 3;
-        velocityY = app.max(app.min(velocityY, 49), -49);
-        velocityX = app.max(app.min(velocityX, 49), -49);
+        velocityY = Math.max(Math.min(velocityY, 49), -49);
+        velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
         entityX += (int) velocityX;
         
@@ -48,7 +46,7 @@ public class Entity {
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
                 if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    int i = (int)(app.abs(velocityX) / velocityX);
+                    int i = (int)(Math.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }

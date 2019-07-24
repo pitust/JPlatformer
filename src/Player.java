@@ -18,8 +18,8 @@ import java.util.*;
  * Player
  */
 public class Player extends Entity {
-    public void redraw() {
-        super.redraw();
+    public void redraw(PApplet app) {
+        super.redraw(app);
         if (isWPressed && onGround) {
             velocityY = 30;
             onGround = false;
@@ -47,12 +47,12 @@ public class Player extends Entity {
     PImage fr;
     boolean isPlFl = true;
 
-    public void init() {
+    public void init(PApplet app) {
         fl = app.loadImage("playerLeft.png");
         fr = app.loadImage("playerRight.png");
     }
 
-    public Player(PApplet p, boolean[][] level) {
-        super(p, level);
+    public Player(boolean[][] level) {
+        super( level);
     }
 }
