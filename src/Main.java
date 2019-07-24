@@ -38,6 +38,12 @@ public class Main extends PApplet {
     }
 
     public void draw() {
+        if (Util.isDead) {
+            fill(255, 0, 0);
+            stroke(255, 0, 0);
+            text("You died", 10, 10);
+            return;
+        }
         g.draw();
     }
     public void keyPressed() {
