@@ -36,7 +36,7 @@ public class Entity {
                 return;
             }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] != Blocks.AIR && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] != Blocks.AIR || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)] != Blocks.AIR) {
+                f ((Util.gridX(entityX) + 1 < cur_level[Util.gridY(entityY) - 1].length && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] != Blocks.AIR) || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)] != Blocks.AIR) { 
                     int i = (int)(Math.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
