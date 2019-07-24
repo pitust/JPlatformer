@@ -18,7 +18,7 @@ public class Main extends PApplet {
     Game g;
     public void setup() {
         // Auto-gen, use <Z>export
-        
+        Game.level = Level.ELEVATORTEST.getLevel();
         g = new Game(this);
         g.setup();
     }
