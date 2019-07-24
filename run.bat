@@ -1,1 +1,1 @@
-java -Xdiag -cp ".\lib\pi.jar;main.jar" -Djava.library.path=".\lib" Main
+java -Xdiag -cp ".\lib\pi.jar;JPlatformer.jar" -Djava.library.path=".\lib" JPlatformer

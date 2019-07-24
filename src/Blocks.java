@@ -6,12 +6,15 @@ public enum Blocks {
     TARGETFLAG,
     PORTAL,
     SPIKE,
+    COIN,
     WIFI,
     MUD,
     AIR;
 
     public String getName() {
         switch (this) {
+            case COIN:
+                return "coin.png";
             case MUD:
                 return "mud.png";
             case AIR:

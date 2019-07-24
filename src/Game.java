@@ -28,7 +28,7 @@ public class Game {
                 "portal5.png"});
         // Auto-gen, use <Z>export
 
-        level = Level.BUGS.getLevel();
+        level = Level.JUMPNRUNTEST1.getLevel();
 
         player = new Player(level);
         player.init(app);
@@ -57,6 +57,10 @@ public class Game {
         if (c == 'q') {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
+        }
+        if(c == 'f')
+        {
+            Goal g = new Goal(app.mouseX, app.mouseY);
         }
         if (c == 'z') {
             PApplet.print("new boolean[][] {");

@@ -1,4 +1,4 @@
-# Main
+# JPlatformer
 ## A simple platformer 4 fun
 This platformer uses processing.
 ## Authors
