@@ -20,7 +20,7 @@ import java.util.*;
 public class Util {
     public static PApplet app;
     public static boolean[][] level;
-
+    public static boolean isDead = false;
     public static int gridX(int x) {
         return x / 50;
     }
