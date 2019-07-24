@@ -27,13 +27,10 @@ public class Entity {
         velocityY = Math.max(Math.min(velocityY, 49), -49);
         velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
-        entityX += (int) velocityX;
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
             if (cur_level[Util.gridY(entityY - 40)][Util.gridX(entityX)] != Blocks.AIR) {
-                int i = (int)(Math.abs(velocityX) / velocityX);
-                entityX -= velocityX + -i * 2 * (Util.globX(Util.gridX(entityX)) - entityX);
                 velocityX = 0;
                 entityY -= velocityY;
                 return;
@@ -55,6 +52,6 @@ public class Entity {
             onGround = false;
         }
         entityY -= velocityY;
-        
+        entityX += (int) velocityX;
     }
 }
