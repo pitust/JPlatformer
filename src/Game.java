@@ -102,7 +102,7 @@ public class Game {
         Util.text("Use WASD keys to move", 20, 20, 10);
         
 
-        player.redraw(app);
+        player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);
@@ -116,7 +116,6 @@ public class Game {
             nonce = true;
         } else
             nonce = app.mousePressed;
-        Util.text("Hi", 10, 10, 10);
     }
     void drawBlock(String name, int x, int y) {
         app.image(app.loadImage(name + ".png"), Util.globX(x), Util.globY(y), 50, 50);
