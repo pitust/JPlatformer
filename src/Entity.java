@@ -35,10 +35,10 @@ public class Entity {
 
     }
 
-    public void redraw() {
+    public void draw(PApplet app) {
         velocityY -= 6;
-        velocityY = app.max(app.min(velocityY, 49), -49);
-        velocityX = app.max(app.min(velocityX, 49), -49);
+        velocityY = Math.max(Math.min(velocityY, 49), -49);
+        velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
         entityX += (int) velocityX;
         

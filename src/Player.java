@@ -18,8 +18,8 @@ import java.util.*;
  * Player
  */
 public class Player extends Entity {
-    public void redraw(PApplet app) {
-        super.redraw(app);
+    public void draw(PApplet app) {
+        super.draw(app);
         if (isWPressed && onGround) {
             velocityY = 30;
             onGround = false;
