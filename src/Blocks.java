@@ -14,17 +14,17 @@ public enum Blocks {
     public String getName() {
         switch (this) {
             case COIN:
-                return "coin.png";
+                return "coin";
             case MUD:
-                return "mud.png";
+                return "mud";
             case AIR:
-                return "air.png";
+                return "air";
             case WIFI:
-                return "wifiResized.png";
+                return "wifiResized";
             case SPIKE:
-                return "spikeResized.png";
+                return "spikeResized";
             case TARGETFLAG:
-                return "targetFlag.png";
+                return "targetFlag";
             default:
                 return this.toString();
         }
