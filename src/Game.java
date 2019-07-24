@@ -1,6 +1,18 @@
 import processing.core.*;
+import processing.data.*;
+import processing.event.*;
+import processing.opengl.*;
+
+import java.util.HashMap;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Game
@@ -18,7 +30,6 @@ public class Game {
         this.app = app;
     }
     boolean nonce = false;
-    ArrayList<Item> items = new ArrayList<Item>();
     public void setup() {
         bg = app.loadImage("bg.png");
         fl = app.loadImage("playerLeft.png");
@@ -27,7 +38,6 @@ public class Game {
                 "portal5.png" });
         // Auto-gen, use <Z>export
         // TODO: add a auto/Levels.java file
-        items.add(new Coin(10, 10));
         level = new boolean[][] {
                 new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
                         false, false, false, false, false, false, false, false, false },
@@ -105,8 +115,14 @@ public class Game {
                         false, false, false, false, false, false, false, false, false },
                 new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
                         false, false, false, false, false, false, false, false, false } };
-        p = new Player(level);
-        p.init(app);
+
+
+        level = new boolean[][] {new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,true,true,true,true,false,true,true,true,true,true,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}};
+
+
+
+        p = new Player(app, level);
+        p.init();
         app.println(app.width / 50);
         app.println(app.height / 50);
         app.frameRate(60);
@@ -177,11 +193,8 @@ public class Game {
                 }
             }
         }
-        for(int i = 0; i < items.size();i++){
-            items.get(i).draw(app);
-        }
-        f.draw(30, 30, 50, 50);
-        p.draw(app);
+        //f.draw(30, 30, 50, 50);
+        p.redraw();
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);
