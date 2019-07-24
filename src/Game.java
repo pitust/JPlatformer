@@ -98,11 +98,11 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        PImage[] EBTtxt = EBT.eBitTxt("\\Use WAD to move!");
+        PImage[] EBTtxt = EBT.eBitTxt("Use WAD to move!");
         for(int i = 0; i<EBTtxt.length; i++)
         {
             if(EBTtxt[i] != null) {
-                app.image(EBTtxt[i], i * 10, 30);
+                app.image(EBTtxt[i], i * 50, 30, 40, 40);
             }
         }
         player.draw(app);
