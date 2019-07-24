@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class EightBitText {
     //Attributes
-    private Map <String, PImage> Letters;
+    private Map<String, PImage> Letters;
+
     //Constructor
-    public EightBitText (PApplet app)
-    {
+    public EightBitText(PApplet app) {
         Letters = new HashMap<>();
         Letters.put("A", app.loadImage("8bitA.png"));
         Letters.put("B", app.loadImage("8bitB.png"));
@@ -52,18 +52,18 @@ public class EightBitText {
         Letters.put("!", app.loadImage("8bitExclamationMark.png"));
         Letters.put("-", app.loadImage("8bitMinusSign.png"));
     }
+
     //Methods
-    public PImage[] eBitTxt(String letters)
-    {
+    public PImage[] eBitTxt(String letters) {
+        letters = letters.toUpperCase();
         PImage[] PIm = new PImage[letters.length()];
-        for(int i=0; i<letters.length(); i++)
-        {
+        for (int i = 0; i < letters.length(); i++) {
             PIm[i] = this.printLetter(letters.charAt(i));
         }
         return PIm;
     }
-    private PImage printLetter(char pLetter)
-    {
+
+    private PImage printLetter(char pLetter) {
         return Letters.get(pLetter + "");
     }
 }

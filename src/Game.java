@@ -25,7 +25,7 @@ public class Game {
                 "portal5.png" });
         // Auto-gen, use <Z>export
 
-        level = Level.ELEVATORTEST.getLevel();
+        level = Level.NOTHING.getLevel();
 
         player = new Player(level);
         player.init(app);
