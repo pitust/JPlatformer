@@ -60,7 +60,7 @@ public class Game {
         }
         if(c == 'f')
         {
-            Goal g = new Goal(app.mouseX, app.mouseY);
+            Goal g = new Goaxl(app.mouseX, app.mouseY);
         }
         if (c == 'z') {
             PApplet.print("new boolean[][] {");
