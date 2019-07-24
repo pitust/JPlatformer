@@ -24,7 +24,7 @@ public class Main extends PApplet {
     }
 
     static public void main(String[] passedArgs) {
-        // It's just a stub, IDK what it does (IDK = I dont know)
+        // It's just a stub, IDK what it does (IDK = I don't know)
         String[] appletArgs = new String[]{"--window-color=#666666", "Main"};
         if (passedArgs != null) {
             PApplet.main(concat(appletArgs, passedArgs));
