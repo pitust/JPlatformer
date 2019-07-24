@@ -1,1 +1,1 @@
-JPlatformer-Class: JPlatformer
+Main-Class: JPlatformer
