@@ -11,11 +11,13 @@ public class Game {
     PImage facingRight;
     Player player;
     Frames portal;
+    Goal flag;
     EightBitText EBT;
 
     public Game(PApplet app) {
         this.app = app;
         this.EBT = new EightBitText(this.app);
+        this.flag = new Goal(50, 300);
     }
 
     boolean nonce = false;
@@ -60,9 +62,6 @@ public class Game {
         }
         if (c == 'r')
             level = Level.DEFAULT.getLevel();
-        if (c == 'f') {
-            Goal g = new Goal(app.mouseX, app.mouseY);
-        }
         if (c == 'z') {
             PApplet.print("new boolean[][] {");
             for (int i = 0; i < level.length; i++) {
