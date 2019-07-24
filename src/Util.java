@@ -21,6 +21,7 @@ public class Util {
     public static PApplet app;
     public static boolean[][] level;
     public static boolean isDead = false;
+    public static EightBitText EBT;
     public static int gridX(int x) {
         return x / 50;
     }
@@ -37,9 +38,12 @@ public class Util {
         return y * 50;
     }
     public static void text(String s, int x, int y, int w) {
-        int ld = s.length() / w;
-        for (int i = 0;i < s.length();i++) {
-            app.image(app.loadImage("8bit" + Character.toString(s.charAt(i)).toUpperCase() +  ".png"), x + ld * i, y, ld, ld);
+        PImage[] EBTtxt = EBT.eBitTxt(s.toUpperCase());
+        for(int i = 0; i<EBTtxt.length; i++)
+        {
+            if(EBTtxt[i] != null) {
+                app.image(EBTtxt[i], i * w + x, y, w, w);
+            }
         }
     }
 }

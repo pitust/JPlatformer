@@ -32,6 +32,7 @@ public class Game {
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
+        Util.EBT = EBT;
     }
     void keyup(char c) {
         if (c == 'w')
@@ -98,13 +99,9 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        PImage[] EBTtxt = EBT.eBitTxt("Use WASD keys to move");
-        for(int i = 0; i<EBTtxt.length; i++)
-        {
-            if(EBTtxt[i] != null) {
-                app.image(EBTtxt[i], i * 10, 30);
-            }
-        }
+        Util.text("Use WASD keys to move", 20, 20, 10);
+        
+
         player.redraw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));

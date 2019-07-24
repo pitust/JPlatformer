@@ -36,7 +36,7 @@ public class Entity {
     }
 
     public void redraw(PApplet app) {
-        velocityY -= 3;
+        velocityY -= 6;
         velocityY = Math.max(Math.min(velocityY, 49), -49);
         velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
