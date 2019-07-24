@@ -38,7 +38,7 @@ public class Entity {
     }
 
     public void redraw() {
-        velocityY -= 3;
+        velocityY -= 6;
         velocityY = app.max(app.min(velocityY, 49), -49);
         velocityX = app.max(app.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
