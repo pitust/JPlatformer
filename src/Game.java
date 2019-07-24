@@ -58,6 +58,10 @@ public class Game {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
         }
+        if(c == 'f')
+        {
+            Goal g = new Goal(app.mouseX, app.mouseY);
+        }
         if (c == 'z') {
             PApplet.print("new boolean[][] {");
             for (int i = 0; i < level.length; i++) {
