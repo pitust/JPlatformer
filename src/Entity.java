@@ -49,7 +49,6 @@ public class Entity {
                 entityX -= velocityX + -i * 2 * (Util.globX(Util.gridX(entityX)) - entityX);
                 velocityX = 0;
                 entityY -= velocityY;
-                PApplet.print("q");
                 return;
             }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {

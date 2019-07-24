@@ -105,7 +105,8 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        Util.text("Use WASD keys to move", 20, 20, 10);
+        Util.text("Use WAD keys to move", 20, 20, 10);
+        
 
         player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
