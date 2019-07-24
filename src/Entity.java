@@ -19,11 +19,9 @@ import java.util.*;
  */
 public class Entity {
 
-    PApplet app;
     boolean[][] cur_level;
 
-    public Entity(PApplet p, boolean[][] level) {
-        app = p;
+    public Entity(boolean[][] level) {
         this.cur_level = level;
     }
 
@@ -33,7 +31,7 @@ public class Entity {
     public float velocityX = 0;
     public boolean onGround = false;
 
-    public void init() {
+    public void init(PApplet app) {
 
     }
 

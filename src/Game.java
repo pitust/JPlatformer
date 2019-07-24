@@ -13,6 +13,7 @@ public class Game {
     Frames portal;
     public Game(PApplet app) {
         this.app = app;
+        this.EBT = new EightBitText(this.app);
     }
     boolean nonce = false;
     public void setup() {
@@ -96,6 +97,13 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
+        PImage[] EBTtxt = EBT.eBitTxt("Use WASD keys to move");
+        for(int i = 0; i<EBTtxt.length; i++)
+        {
+            if(EBTtxt[i] != null) {
+                app.image(EBTtxt[i], i * 10, 30);
+            }
+        }
         player.redraw();
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
