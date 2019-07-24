@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class Game {
     PApplet app;
-    boolean[][] level;
+    public static boolean[][] level;
     PImage bg;
     PImage fl;
     PImage fr;
@@ -37,84 +37,9 @@ public class Game {
         f = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
                 "portal5.png" });
         // Auto-gen, use <Z>export
-        // TODO: add a auto/Levels.java file
-        level = new boolean[][] {
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false },
-                new boolean[] { false, false, false, false, false, false, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false, false } };
+
+        Level.JUMPNRUNTEST2.setLevel();
+
         p = new Player(app, level);
         p.init();
         app.println(app.width / 50);
@@ -187,7 +112,7 @@ public class Game {
                 }
             }
         }
-        f.draw(30, 30, 50, 50);
+        //f.draw(30, 30, 50, 50);
         p.redraw();
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
@@ -202,6 +127,7 @@ public class Game {
             nonce = true;
         } else
             nonce = app.mousePressed;
+        Util.text("Hi", 10, 10, 10);
     }
     void drawBlock(String name, int x, int y) {
         app.image(app.loadImage(name + ".png"), Util.globX(x), Util.globY(y), 50, 50);
