@@ -42,7 +42,6 @@ public class Game {
         // Auto-gen, use <Z>export
 
         level = Level.DEFAULT.getLevel();
-
         player = new Player(level);
         player.init(app);
         app.frameRate(60);
