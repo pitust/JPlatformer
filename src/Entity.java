@@ -40,17 +40,25 @@ public class Entity implements Drawable{
         velocityY = Math.max(Math.min(velocityY, 20), -20);
         entityX += (int) velocityX;
         velocityX = (int)(velocityX / 1.1);
+        
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
-            if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY < 0) {
+            if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    entityY -= 50;
+                    app.print("q");
+                }
                 velocityY = 0;
                 onGround = true;
                 velocityX *= 2;
                 velocityX /= 3;
+                entityY = Util.globY(Util.gridY(entityY));
             } else
                 onGround = false;
-        } else
+        } else {
             onGround = false;
+        }
         entityY -= velocityY;
+        
     }
 }
