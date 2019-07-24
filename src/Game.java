@@ -1,18 +1,4 @@
 import processing.core.*;
-import processing.data.*;
-import processing.event.*;
-import processing.opengl.*;
-
-import java.util.HashMap;
-
-import java.util.ArrayList;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.*;
 
 /**
  * Game
@@ -20,87 +6,85 @@ import java.util.*;
 public class Game {
     PApplet app;
     public static boolean[][] level;
-    PImage bg;
-    PImage fl;
-    PImage fr;
-    Player p;
-    Frames f;
+    PImage background;
+    PImage facingLeft;
+    PImage facingRight;
+    Player player;
+    Frames portal;
     EightBitText EBT;
-    boolean b = true;
     public Game(PApplet app) {
         this.app = app;
         this.EBT = new EightBitText(this.app);
     }
     boolean nonce = false;
     public void setup() {
-        bg = app.loadImage("bg.png");
-        fl = app.loadImage("playerLeft.png");
-        fr = app.loadImage("playerRight.png");
-        f = Blocks.PORTAL.getFrames(app);
+        background = app.loadImage("bg.png");
+        facingLeft = app.loadImage("playerLeft.png");
+        facingRight = app.loadImage("playerRight.png");
+        portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
+                "portal5.png" });
         // Auto-gen, use <Z>export
 
         level = Level.ELEVATORTEST.getLevel();
 
-        p = new Player(level);
-        p.init(app);
-        app.println(app.width / 50);
-        app.println(app.height / 50);
+        player = new Player(level);
+        player.init(app);
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
     }
     void keyup(char c) {
         if (c == 'w')
-            p.isWPressed = false;
+            player.isWPressed = false;
         if (c == 'd')
-            p.isDPressed = false;
+            player.isDPressed = false;
         if (c == 'a')
-            p.isAPressed = false;
+            player.isAPressed = false;
     }
     void key(char c) {
         if (c == 'w')
-            p.isWPressed = true;
+            player.isWPressed = true;
         if (c == 'd')
-            p.isDPressed = true;
+            player.isDPressed = true;
         if (c == 'a')
-            p.isAPressed = true;
+            player.isAPressed = true;
         if (c == 'q') {
-            p.entityX = app.mouseX;
-            p.entityY = app.mouseY;
+            player.entityX = app.mouseX;
+            player.entityY = app.mouseY;
         }
         if (c == 'z') {
-            app.print("new boolean[][] {");
+            PApplet.print("new boolean[][] {");
             for (int i = 0; i < level.length; i++) {
-                app.print("new boolean[] {");
+                PApplet.print("new boolean[] {");
                 for (int j = 0; j < level[i].length; j++) {
-                    app.print(level[i][j]);
+                    PApplet.print(level[i][j]);
                     if (j + 1 != level[i].length)
-                        app.print(",");
+                        PApplet.print(",");
                 }
-                app.print("}");
+                PApplet.print("}");
                 if (i + 1 != level.length)
-                    app.print(",");
+                    PApplet.print(",");
             }
-            app.print("}");
+            PApplet.print("}");
         }
         if (c == 'x') {
-            app.print("new boolean[][] {");
+            PApplet.print("new boolean[][] {");
             for (int i = 0; i < 38; i++) {
-                app.print("new boolean[] {");
+                PApplet.print("new boolean[] {");
                 for (int j = 0; j < 21; j++) {
-                    app.print("false");
+                    PApplet.print("false");
                     if (j + 1 != 21)
-                        app.print(",");
+                        PApplet.print(",");
                 }
-                app.print("}");
+                PApplet.print("}");
                 if (i + 1 != 38)
-                    app.print(",");
+                    PApplet.print(",");
             }
-            app.print("}");
+            PApplet.print("}");
         }
     }
     void draw() {
-        app.image(bg, 0, 0, app.width,app. height);
+        app.image(background, 0, 0, app.width,app. height);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
                 if (level[y][x]) {
@@ -114,7 +98,6 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        p.redraw(app);
         PImage[] EBTtxt = EBT.eBitTxt("Use WASD keys to move");
         for(int i = 0; i<EBTtxt.length; i++)
         {
@@ -122,7 +105,7 @@ public class Game {
                 app.image(EBTtxt[i], i * 10, 30);
             }
         }
-        app.draw();
+        player.redraw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);
