@@ -18,6 +18,7 @@ import java.util.*;
  * Player
  */
 public class Player extends Entity {
+
     public void draw(PApplet app) {
         super.draw(app);
         if (isWPressed && onGround) {
