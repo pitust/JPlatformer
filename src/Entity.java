@@ -53,8 +53,8 @@ public class Entity {
                 return;
             }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level.length > Util.gridY(entityY) - 1 && (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) + 1 && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1]) || (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)])) {
-                    int i = (int)(app.abs(velocityX) / velocityX);
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    int i = (int)(Math.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }
