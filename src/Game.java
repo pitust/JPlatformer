@@ -38,7 +38,7 @@ public class Game {
                 "portal5.png" });
         // Auto-gen, use <Z>export
 
-        Level.JUMPNRUNTEST2.setLevel();
+        level = Level.ELEVATORTEST.getLevel();
 
         p = new Player(app, level);
         p.init();

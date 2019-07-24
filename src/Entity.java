@@ -52,6 +52,9 @@ public class Entity {
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    Util.isDead = true;
+                }
                 velocityY = 0;
                 onGround = true;
                 velocityX *= 2;
