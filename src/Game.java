@@ -105,7 +105,7 @@ public class Game {
                 app.image(EBTtxt[i], i * 10, 30);
             }
         }
-        player.redraw(app);
+        player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);
