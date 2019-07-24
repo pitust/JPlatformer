@@ -46,19 +46,24 @@ public class Entity {
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
+            if (cur_level[Util.gridY(entityY - 40)][Util.gridX(entityX)]) {
+                int i = (int)(app.abs(velocityX) / velocityX);
+                entityX -= velocityX + -i * 2 * (Util.globX(Util.gridX(entityX)) - entityX);
+                velocityX = 0;
+                entityY -= velocityY;
+                PApplet.print("q");
+                return;
+            }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                if (cur_level.length > Util.gridY(entityY) - 1 && (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) + 1 && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1]) || (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)])) {
                     int i = (int)(app.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    Util.isDead = true;
-                }
                 velocityY = 0;
                 onGround = true;
-                velocityX *= 2;
-                velocityX /= 3;
+                velocityX *= 5;
+                velocityX /= 6;
                 entityY = Util.globY(Util.gridY(entityY));
             } else
                 onGround = false;
