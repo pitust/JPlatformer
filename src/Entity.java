@@ -47,8 +47,7 @@ public class Entity {
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
                 if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    entityY -= 50;
-                    app.print("q");
+                    entityY -= 5;
                 }
                 velocityY = 0;
                 onGround = true;
