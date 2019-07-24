@@ -39,15 +39,18 @@ public class Entity {
 
     public void redraw() {
         velocityY -= 3;
-        velocityY = app.max(app.min(velocityY, 20), -20);
-        entityX += (int) velocityX;
+        velocityY = app.max(app.min(velocityY, 49), -49);
+        velocityX = app.max(app.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
+        entityX += (int) velocityX;
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    entityY -= 5;
+                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
+                    int i = (int)(app.abs(velocityX) / velocityX);
+                    entityX -= velocityX + i * 2;
+                    velocityX = 0;
                 }
                 velocityY = 0;
                 onGround = true;
