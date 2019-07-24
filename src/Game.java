@@ -28,7 +28,7 @@ public class Game {
                 "portal5.png"});
         // Auto-gen, use <Z>export
 
-        level = Level.JUMPNRUNTEST1.getLevel();
+        level = Level.DEFAULT.getLevel();
 
         player = new Player(level);
         player.init(app);
@@ -58,9 +58,10 @@ public class Game {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
         }
-        if(c == 'f')
-        {
-            Goal g = new Goaxl(app.mouseX, app.mouseY);
+        if (c == 'r')
+            level = Level.DEFAULT.getLevel();
+        if (c == 'f') {
+            Goal g = new Goal(app.mouseX, app.mouseY);
         }
         if (c == 'z') {
             PApplet.print("new boolean[][] {");
@@ -110,7 +111,7 @@ public class Game {
         }
         //f.draw(30, 30, 50, 50);
         Util.text("Use WAD keys to move", 20, 20, 10);
-        
+
 
         player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
