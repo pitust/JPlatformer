@@ -35,28 +35,33 @@ public class Entity {
 
     }
 
-    public void redraw(PApplet app) {
-        velocityY -= 3;
-        velocityY = Math.max(Math.min(velocityY, 49), -49);
-        velocityX = Math.max(Math.min(velocityX, 49), -49);
+    public void redraw() {
+        velocityY -= 6;
+        velocityY = app.max(app.min(velocityY, 49), -49);
+        velocityX = app.max(app.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
         entityX += (int) velocityX;
         
         if (Util.gridY(entityY) > 0 && Util.gridY(entityY) < cur_level.length && Util.gridX(entityX) >= 0
                 && Util.gridX(entityX) < cur_level[Util.gridY(entityY)].length) {
+            if (cur_level[Util.gridY(entityY - 40)][Util.gridX(entityX)]) {
+                int i = (int)(app.abs(velocityX) / velocityX);
+                entityX -= velocityX + -i * 2 * (Util.globX(Util.gridX(entityX)) - entityX);
+                velocityX = 0;
+                entityY -= velocityY;
+                PApplet.print("q");
+                return;
+            }
             if (cur_level[Util.gridY(entityY)][Util.gridX(entityX)] && velocityY <= 0) {
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1] || cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    int i = (int)(Math.abs(velocityX) / velocityX);
+                if (cur_level.length > Util.gridY(entityY) - 1 && (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) + 1 && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX) + 1]) || (cur_level[Util.gridY(entityY) - 1].length > Util.gridX(entityX) && cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)])) {
+                    int i = (int)(app.abs(velocityX) / velocityX);
                     entityX -= velocityX + i * 2;
                     velocityX = 0;
                 }
-                if (cur_level[Util.gridY(entityY) - 1][Util.gridX(entityX)]) {
-                    Util.isDead = true;
-                }
                 velocityY = 0;
                 onGround = true;
-                velocityX *= 2;
-                velocityX /= 3;
+                velocityX *= 5;
+                velocityX /= 6;
                 entityY = Util.globY(Util.gridY(entityY));
             } else
                 onGround = false;

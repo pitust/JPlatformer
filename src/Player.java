@@ -34,9 +34,9 @@ public class Player extends Entity {
         }
 
         if (isPlFl) {
-            app.image(fl, entityX, entityY - 80, 50, 70);
+            app.image(fl, entityX, entityY - 70, 50, 70);
         } else {
-            app.image(fr, entityX, entityY - 80, 50, 70);
+            app.image(fr, entityX, entityY - 70, 50, 70);
         }
     }
 
