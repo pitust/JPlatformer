@@ -25,7 +25,7 @@ public class Game {
                 "portal5.png" });
         // Auto-gen, use <Z>export
 
-        level = Level.ELEVATORTEST.getLevel();
+        level = Level.NOTHING.getLevel();
 
         player = new Player(level);
         player.init(app);
@@ -98,7 +98,7 @@ public class Game {
             }
         }
         //f.draw(30, 30, 50, 50);
-        PImage[] EBTtxt = EBT.eBitTxt("Use WASD keys to move");
+        PImage[] EBTtxt = EBT.eBitTxt("\\Use WAD to move!");
         for(int i = 0; i<EBTtxt.length; i++)
         {
             if(EBTtxt[i] != null) {
