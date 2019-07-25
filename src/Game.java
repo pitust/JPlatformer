@@ -143,10 +143,10 @@ public class Game {
         for (int y = 0; y < 21 && y < Util.level.length; y++) {
             for (int x = 0; x < 38 && x < Util.level[y].length; x++) {
                 if (Util.level[y][x] != Blocks.AIR && Util.level[y][x] == Blocks.DIRT) {
-                    boolean isTop = (y - 1 < 0) || Util.level[y - 1][x] == Blocks.AIR;
-                    boolean isBottom = (y + 1 >= Util.level.length) || Util.level[y + 1][x] == Blocks.AIR;
-                    boolean isLeft = (x - 1 < 0) || Util.level[y][x - 1] == Blocks.AIR;
-                    boolean isRight = (x + 1 >= Util.level[y].length) || Util.level[y][x + 1] == Blocks.AIR;
+                    boolean isTop = (y - 1 < 0) || Util.level[y - 1][x] != Blocks.DIRT;
+                    boolean isBottom = (y + 1 >= Util.level.length) || Util.level[y + 1][x] != Blocks.DIRT;
+                    boolean isLeft = (x - 1 < 0) || Util.level[y][x - 1] != Blocks.DIRT;
+                    boolean isRight = (x + 1 >= Util.level[y].length) || Util.level[y][x + 1] != Blocks.DIRT;
                     String nm = Blocks.DIRT.getNameForDirt(isBottom, isLeft, isRight, isTop);
                     drawBlock(nm, x, y);
                 } else if (Util.level[y][x] != Blocks.AIR) {

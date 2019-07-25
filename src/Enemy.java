@@ -23,7 +23,7 @@ public class Enemy extends Entity {
             app.image(facingRight, entityX, entityY - 70, 50, 70);
         }
         velocityX += dir() * 6;
-        if (onGround && Util.gridY(entityY) < Util.level.length && Util.gridX(entityX + (int)velocityX) < Util.level[Util.gridY(entityY)].length && Util.level[Util.gridY(entityY)][Util.gridX(entityX + (int)velocityX)] == Blocks.AIR) {
+        if (onGround && Util.gridY(entityY) < Util.level.length && Util.gridX(entityX + (int)velocityX) < Util.level[Util.gridY(entityY)].length && (Util.level[Util.gridY(entityY)][Util.gridX(entityX + (int)velocityX)] == Blocks.AIR || Util.level[Util.gridY(entityY) - 1][Util.gridX(entityX + (int)velocityX + 20)] == Blocks.DIRT)) {
             velocityY = 30;
             onGround = false;
         } 
