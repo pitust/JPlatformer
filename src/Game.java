@@ -5,7 +5,7 @@ import processing.core.*;
  */
 public class Game {
     PApplet app;
-    public static boolean[][] level;
+    public static Blocks[][] level;
     PImage background;
     PImage facingLeft;
     PImage facingRight;
@@ -21,7 +21,20 @@ public class Game {
     }
 
     boolean nonce = false;
+    int cursorType = 0;
+    private Blocks cursorType() {
+        cursorType = cursorType % 2;
+        switch (cursorType) {
+            case 0:
+                return Blocks.DIRT;
 
+            case 1:
+                return Blocks.WIFI;
+
+            default:
+                return Blocks.DIRT;
+        }
+    }
     public void setup() {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
@@ -63,9 +76,9 @@ public class Game {
         if (c == 'r')
             level = Level.DEFAULT.getLevel();
         if (c == 'z') {
-            PApplet.print("new boolean[][] {");
+            PApplet.print("new Blocks[][] {");
             for (int i = 0; i < level.length; i++) {
-                PApplet.print("new boolean[] {");
+                PApplet.print("new Blocks[] {");
                 for (int j = 0; j < level[i].length; j++) {
                     PApplet.print(level[i][j]);
                     if (j + 1 != level[i].length)
@@ -78,11 +91,11 @@ public class Game {
             PApplet.print("}");
         }
         if (c == 'x') {
-            PApplet.print("new boolean[][] {");
+            PApplet.print("new Blocks[][] {");
             for (int i = 0; i < 38; i++) {
-                PApplet.print("new boolean[] {");
+                PApplet.print("new Blocks[] {");
                 for (int j = 0; j < 21; j++) {
-                    PApplet.print("false");
+                    PApplet.print("Blocks.AIR");
                     if (j + 1 != 21)
                         PApplet.print(",");
                 }
@@ -98,13 +111,15 @@ public class Game {
         app.image(background, 0, 0, app.width, app.height);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
-                if (level[y][x]) {
-                    boolean isTop = (y - 1 < 0) || !level[y - 1][x];
-                    boolean isBottom = (y + 1 >= level.length) || !level[y + 1][x];
-                    boolean isLeft = (x - 1 < 0) || !level[y][x - 1];
-                    boolean isRight = (x + 1 >= level[y].length) || !level[y][x + 1];
+                if (level[y][x] != Blocks.AIR && level[y][x] == Blocks.DIRT) {
+                    boolean isTop = (y - 1 < 0) || level[y - 1][x] == Blocks.AIR;
+                    boolean isBottom = (y + 1 >= level.length) || level[y + 1][x] == Blocks.AIR;
+                    boolean isLeft = (x - 1 < 0) || level[y][x - 1] == Blocks.AIR;
+                    boolean isRight = (x + 1 >= level[y].length) || level[y][x + 1] == Blocks.AIR;
                     String nm = Blocks.DIRT.getNameForDirt(isBottom, isLeft, isRight, isTop);
                     drawBlock(nm, x, y);
+                } else if (level[y][x] != Blocks.AIR) {
+                    drawBlock(level[y][x].getName(), x, y);
                 }
             }
         }
@@ -119,10 +134,15 @@ public class Game {
         app.fill(0, 0, 0, 0);
         app.rect(xa, ya, 50, 50);
         if (app.mousePressed && !nonce) {
-            ya = Util.gridY(app.mouseY);
-            xa = Util.gridX(app.mouseX);
-            if (ya >= 0 && ya < level.length && xa >= 0 && xa < level[ya].length)
-                level[ya][xa] = !level[ya][xa];
+            if (app.mouseButton == PApplet.RIGHT) {
+                cursorType += 1;
+                PApplet.print("q");
+            } else {
+                ya = Util.gridY(app.mouseY);
+                xa = Util.gridX(app.mouseX);
+                if (ya >= 0 && ya < level.length && xa >= 0 && xa < level[ya].length)
+                    level[ya][xa] = level[ya][xa] == Blocks.AIR ? cursorType() : Blocks.AIR;
+            }
             nonce = true;
         } else
             nonce = app.mousePressed;

@@ -14,19 +14,19 @@ public enum Blocks {
     public String getName() {
         switch (this) {
             case COIN:
-                return "coin.png";
+                return "coin";
             case MUD:
-                return "mud.png";
+                return "mud";
             case AIR:
-                return "air.png";
+                return "air";
             case WIFI:
-                return "wifiResized.png";
+                return "wifiResized";
             case SPIKE:
-                return "spikeResized.png";
+                return "spikeResized";
             case TARGETFLAG:
-                return "targetFlag.png";
+                return "targetFlag";
             default:
-                return null;
+                return this.toString();
         }
     }
 
@@ -49,15 +49,5 @@ public enum Blocks {
             return dirt;
         } else
             return null;
-    }
-
-    public Frames getFrames(PApplet app) {
-        switch (this) {
-            case PORTAL:
-                return new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
-                        "portal5.png" });
-                default:
-                    return null;
-        }
     }
 }
