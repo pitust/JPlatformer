@@ -20,25 +20,39 @@ public class Game {
 
     boolean nonce = false;
     int cursorType = 0;
-    private Blocks cursorType() {
-        cursorType = cursorType % 2;
-        switch (cursorType) {
-            case 0:
-                return Blocks.DIRT;
 
-            case 1:
-                return Blocks.WIFI;
-    
-            default:
-                return Blocks.DIRT;
+    private Blocks cursorType() {
+        cursorType = cursorType % 6;
+        switch (cursorType) {
+        case 0:
+            return Blocks.DIRT;
+
+        case 1:
+            return Blocks.WIFI;
+
+        case 2:
+            return Blocks.COIN;
+
+        case 3:
+            return Blocks.MUD;
+
+        case 4:
+            return Blocks.SPIKE;
+
+        case 5:
+            return Blocks.TARGETFLAG;
+
+        default:
+            return Blocks.DIRT;
         }
     }
+
     public void setup() {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
         facingRight = app.loadImage("playerRight.png");
-        portal = new Frames(app, new String[]{"portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
-                "portal5.png"});
+        portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png",
+                "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
 
         level = Level.DEFAULT.getLevel();
@@ -74,7 +88,7 @@ public class Game {
         if (c == 'r')
             level = Level.DEFAULT.getLevel();
         if (c == 'f') {
-            //Goal g = new Goal(app.mouseX, app.mouseY);
+            // Goal g = new Goal(app.mouseX, app.mouseY);
         }
         if (c == 'z') {
             PApplet.print("new Blocks[][] {");
@@ -124,9 +138,8 @@ public class Game {
                 }
             }
         }
-        //f.draw(30, 30, 50, 50);
+        // f.draw(30, 30, 50, 50);
         Util.text("Use WAD keys to move", 20, 20, 10);
-
 
         player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
