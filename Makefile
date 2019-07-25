@@ -7,7 +7,13 @@ main.jar: $(CLASSES)
 out/%.class: src/%.java
 	javac $< -d out -cp "lib\pi.jar;out"
 
+run_linux_god: main.jar
+	java -Xdiag -cp ".\lib\pi.jar;JPlatformer.jar" -Djava.library.path=".\lib" JPlatformer $(shell cat .godmode)
+run_god: main.jar
+	java -Xdiag -cp ".\lib\pi.jar;JPlatformer.jar" -Djava.library.path=".\lib" JPlatformer $(shell powershell cat .godmode)
 run: main.jar
 	java -Xdiag -cp ".\lib\pi.jar;JPlatformer.jar" -Djava.library.path=".\lib" JPlatformer
 clean:
 	rm -rf out/*.class
+init:
+	echo "NO" > .godmode

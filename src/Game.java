@@ -20,7 +20,7 @@ public class Game {
 
     boolean nonce = false;
     int cursorType = 0;
-
+    static public boolean godMode = false;
     private Blocks cursorType() {
         cursorType = cursorType % 6;
         switch (cursorType) {
@@ -80,16 +80,19 @@ public class Game {
             player.isDPressed = true;
         if (c == 'a')
             player.isAPressed = true;
-        if (c == 'q') {
+        if (c == 'q' && godMode) {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
         }
-        if (c == 'r')
+        if (c == 'r') {
             level = Level.DEFAULT.getLevel();
-        if (c == 'f') {
+            player.entityX = Level.DEFAULT.getSpawnX();
+            player.entityY = Level.DEFAULT.getSpawnY();
+        }
+        if (c == 'f' && godMode) {
             // Goal g = new Goal(app.mouseX, app.mouseY);
         }
-        if (c == 'z') {
+        if (c == 'z' && godMode) {
             PApplet.print("new Blocks[][] {");
             for (int i = 0; i < level.length; i++) {
                 PApplet.print("new Blocks[] {");
@@ -104,7 +107,7 @@ public class Game {
             }
             PApplet.print("}");
         }
-        if (c == 'x') {
+        if (c == 'x' && godMode) {
             PApplet.print("new Blocks[][] {");
             for (int i = 0; i < 38; i++) {
                 PApplet.print("new Blocks[] {");
@@ -149,10 +152,9 @@ public class Game {
         app.stroke(0);
         app.fill(0, 0, 0, 0);
         app.rect(xa, ya, 50, 50);
-        if (app.mousePressed && !nonce) {
+        if (app.mousePressed && !nonce && godMode) {
             if (app.mouseButton == PApplet.RIGHT) {
                 cursorType += 1;
-                PApplet.print("q");
             } else {
                 ya = Util.gridY(app.mouseY);
                 xa = Util.gridX(app.mouseX);

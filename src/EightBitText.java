@@ -72,7 +72,6 @@ public class EightBitText {
             if (letters.charAt(i) == '\b') {
                 String s = letters.charAt(i + 1) + "" + letters.charAt(i + 2) + letters.charAt(i + 3) + "" + letters.charAt(i + 4);
                 i += 4;
-                PApplet.print(s);
                 switch (s) {
                     case "COPY":
                     PIm[idx] = Letters.get("copy");
