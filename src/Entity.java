@@ -23,7 +23,7 @@ public class Entity {
     }
 
     public void draw(PApplet app) {
-        velocityY -= 6;
+        velocityY -= 9;
         velocityY = Math.max(Math.min(velocityY, 49), -49);
         velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
