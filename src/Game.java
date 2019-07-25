@@ -124,6 +124,9 @@ public class Game {
 
     void draw() {
         app.image(background, 0, 0, app.width, app.height);
+        app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
+        String cursorName = cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+        EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
                 if (level[y][x] != Blocks.AIR && level[y][x] == Blocks.DIRT) {
@@ -139,7 +142,7 @@ public class Game {
             }
         }
         // f.draw(30, 30, 50, 50);
-        Util.text("Use WAD keys to move", 20, 20, 10);
+        EightBitText.text("Use WAD keys to move", 20, 20, 10);
 
         player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
