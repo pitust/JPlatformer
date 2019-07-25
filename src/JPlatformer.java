@@ -17,7 +17,7 @@ public class JPlatformer extends PApplet {
     static public void main(String[] passedArgs) {
         // It's just a stub, IDK what it does (IDK = I don't know)
         String[] appletArgs = new String[]{"--window-color=#666666", "JPlatformer"};
-        
+        Game.isRelease = isRelease;
         if (passedArgs.length == 1) {
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-512"); 
