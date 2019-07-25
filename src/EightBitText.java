@@ -66,4 +66,18 @@ public class EightBitText {
     private PImage printLetter(char pLetter) {
         return Letters.get(pLetter + "");
     }
+    static EightBitText EBT = null;
+    private static void initEBT() {
+        if (EBT == null) EBT = new EightBitText(Util.app);
+    }
+    public static void text(String s, int x, int y, int w) {
+        initEBT();
+        PImage[] EBTtxt = EBT.eBitTxt(s.toUpperCase());
+        for(int i = 0; i<EBTtxt.length; i++)
+        {
+            if(EBTtxt[i] != null) {
+                Util.app.image(EBTtxt[i], i * w + x, y, w, w);
+            }
+        }
+    }
 }

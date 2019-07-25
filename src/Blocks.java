@@ -25,6 +25,8 @@ public enum Blocks {
                 return "spikeResized";
             case TARGETFLAG:
                 return "targetFlag";
+            case DIRT:
+                return "dirt";
             default:
                 return this.toString();
         }

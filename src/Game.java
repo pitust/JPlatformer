@@ -22,25 +22,39 @@ public class Game {
 
     boolean nonce = false;
     int cursorType = 0;
+
     private Blocks cursorType() {
-        cursorType = cursorType % 2;
+        cursorType = cursorType % 6;
         switch (cursorType) {
-            case 0:
-                return Blocks.DIRT;
+        case 0:
+            return Blocks.DIRT;
 
-            case 1:
-                return Blocks.WIFI;
+        case 1:
+            return Blocks.WIFI;
 
-            default:
-                return Blocks.DIRT;
+        case 2:
+            return Blocks.COIN;
+
+        case 3:
+            return Blocks.MUD;
+
+        case 4:
+            return Blocks.SPIKE;
+
+        case 5:
+            return Blocks.TARGETFLAG;
+
+        default:
+            return Blocks.DIRT;
         }
     }
+
     public void setup() {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
         facingRight = app.loadImage("playerRight.png");
-        portal = new Frames(app, new String[]{"portal0.png", "portal1.png", "portal2.png", "portal3.png", "portal4.png",
-                "portal5.png"});
+        portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png",
+                "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
 
         level = Level.DEFAULT.getLevel();
@@ -75,6 +89,9 @@ public class Game {
         }
         if (c == 'r')
             level = Level.DEFAULT.getLevel();
+        if (c == 'f') {
+            // Goal g = new Goal(app.mouseX, app.mouseY);
+        }
         if (c == 'z') {
             PApplet.print("new Blocks[][] {");
             for (int i = 0; i < level.length; i++) {
@@ -109,6 +126,9 @@ public class Game {
 
     void draw() {
         app.image(background, 0, 0, app.width, app.height);
+        app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
+        String cursorName = cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+        EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
                 if (level[y][x] != Blocks.AIR && level[y][x] == Blocks.DIRT) {
@@ -123,9 +143,8 @@ public class Game {
                 }
             }
         }
-        //f.draw(30, 30, 50, 50);
-        Util.text("Use WAD keys to move", 20, 20, 10);
-
+        // f.draw(30, 30, 50, 50);
+        EightBitText.text("Use WAD keys to move", 20, 20, 10);
 
         player.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
