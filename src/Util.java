@@ -37,13 +37,4 @@ public class Util {
     public static int globY(int y) {
         return y * 50;
     }
-    public static void text(String s, int x, int y, int w) {
-        PImage[] EBTtxt = EBT.eBitTxt(s.toUpperCase());
-        for(int i = 0; i<EBTtxt.length; i++)
-        {
-            if(EBTtxt[i] != null) {
-                app.image(EBTtxt[i], i * w + x, y, w, w);
-            }
-        }
-    }
 }

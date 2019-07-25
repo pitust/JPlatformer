@@ -13,30 +13,30 @@ public class Player extends Entity {
         }
         if (isAPressed) {
             velocityX -= 7;
-            isPlFl = true;
+            isPlayerFacingLeft = true;
         }
         if (isDPressed) {
             velocityX += 7;
-            isPlFl = false;
+            isPlayerFacingLeft = false;
         }
 
-        if (isPlFl) {
-            app.image(fl, entityX, entityY - 70, 50, 70);
+        if (isPlayerFacingLeft) {
+            app.image(facingLeft, entityX, entityY - 70, 50, 70);
         } else {
-            app.image(fr, entityX, entityY - 70, 50, 70);
+            app.image(facingRight, entityX, entityY - 70, 50, 70);
         }
     }
 
     public boolean isAPressed = false;
     public boolean isDPressed = false;
     public boolean isWPressed = false;
-    PImage fl;
-    PImage fr;
-    boolean isPlFl = true;
+    PImage facingLeft;
+    PImage facingRight;
+    boolean isPlayerFacingLeft = true;
 
     public void init(PApplet app) {
-        fl = app.loadImage("playerLeft.png");
-        fr = app.loadImage("playerRight.png");
+        facingLeft = app.loadImage("playerLeft.png");
+        facingRight = app.loadImage("playerRight.png");
     }
 
     public Player(Blocks[][] level) {
