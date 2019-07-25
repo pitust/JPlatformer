@@ -62,7 +62,6 @@ public class Game {
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
-        Util.EBT = EBT;
     }
 
     void keyup(char c) {

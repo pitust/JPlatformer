@@ -21,7 +21,6 @@ public class Util {
     public static PApplet app;
     public static Blocks[][] level;
     public static boolean isDead = false;
-    public static EightBitText EBT;
     public static int gridX(int x) {
         return x / 50;
     }
