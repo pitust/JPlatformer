@@ -25,7 +25,7 @@ public class Entity {
     }
 
     public void draw(PApplet app) {
-        velocityY -= 9;
+        velocityY -= 6;
         velocityY = Math.max(Math.min(velocityY, 49), -49);
         velocityX = Math.max(Math.min(velocityX, 49), -49);
         velocityX = (int)(velocityX / 1.1);
@@ -45,8 +45,8 @@ public class Entity {
                 }
                 velocityY = 0;
                 onGround = true;
-                velocityX *= 5;
-                velocityX /= 6;
+                velocityX *= 4;
+                velocityX /= 5;
                 entityY = Util.globY(Util.gridY(entityY));
             } else
                 onGround = false;

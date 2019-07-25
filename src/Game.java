@@ -21,6 +21,8 @@ public class Game {
     boolean nonce = false;
     int cursorType = 0;
     static public boolean godMode = false;
+    // This is actually downstream from JPlatformer.java
+    public static boolean isRelease;
     private Blocks cursorType() {
         cursorType = cursorType % 6;
         switch (cursorType) {
@@ -46,7 +48,7 @@ public class Game {
             return Blocks.DIRT;
         }
     }
-
+    Enemy e;
     public void setup() {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
@@ -58,7 +60,9 @@ public class Game {
         level = l.getLevel();
 
         player = new Player(l);
+        e = new Enemy(l, player);
         player.init(app);
+        e.init(app);
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
@@ -123,12 +127,20 @@ public class Game {
             PApplet.print("}");
         }
     }
-
     void draw() {
         app.image(background, 0, 0, app.width, app.height);
-        app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
-        String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
-        EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
+        if (godMode && isRelease) {
+            app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
+            String cursorName = cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+            EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
+        } else if (!godMode && isRelease) {
+            String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+            EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
+        } else if (godMode) {
+            app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
+            String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+            EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
+        }
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
                 if (level[y][x] != Blocks.AIR && level[y][x] == Blocks.DIRT) {
@@ -147,6 +159,7 @@ public class Game {
         EightBitText.text("Use WAD keys to move", 20, 20, 10);
 
         player.draw(app);
+        e.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
         app.stroke(0);

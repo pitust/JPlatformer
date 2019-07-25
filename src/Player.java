@@ -40,6 +40,6 @@ public class Player extends Entity {
     }
 
     public Player(Level level) {
-        super( level);
+        super(level);
     }
 }
