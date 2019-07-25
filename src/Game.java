@@ -54,10 +54,10 @@ public class Game {
         portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png",
                 "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
+        Level l = Level.DEFAULT;
+        level = l.getLevel();
 
-        level = Level.DEFAULT.getLevel();
-
-        player = new Player(level);
+        player = new Player(l);
         player.init(app);
         app.frameRate(60);
         Util.app = app;
@@ -125,7 +125,7 @@ public class Game {
     void draw() {
         app.image(background, 0, 0, app.width, app.height);
         app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
-        String cursorName = cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+        String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
         EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {

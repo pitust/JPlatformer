@@ -39,7 +39,7 @@ public class Player extends Entity {
         facingRight = app.loadImage("playerRight.png");
     }
 
-    public Player(Blocks[][] level) {
+    public Player(Level level) {
         super( level);
     }
 }
