@@ -22,7 +22,7 @@ public class Game {
 
     boolean nonce = false;
     int cursorType = 0;
-
+    static public boolean godMode = false;
     private Blocks cursorType() {
         cursorType = cursorType % 6;
         switch (cursorType) {
@@ -56,15 +56,14 @@ public class Game {
         portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png",
                 "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
+        Level l = Level.DEFAULT;
+        level = l.getLevel();
 
-        level = Level.DEFAULT.getLevel();
-
-        player = new Player(level);
+        player = new Player(l);
         player.init(app);
         app.frameRate(60);
         Util.app = app;
         Util.level = level;
-        Util.EBT = EBT;
     }
 
     void keyup(char c) {
@@ -83,16 +82,19 @@ public class Game {
             player.isDPressed = true;
         if (c == 'a')
             player.isAPressed = true;
-        if (c == 'q') {
+        if (c == 'q' && godMode) {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
         }
-        if (c == 'r')
+        if (c == 'r') {
             level = Level.DEFAULT.getLevel();
-        if (c == 'f') {
+            player.entityX = Level.DEFAULT.getSpawnX();
+            player.entityY = Level.DEFAULT.getSpawnY();
+        }
+        if (c == 'f' && godMode) {
             // Goal g = new Goal(app.mouseX, app.mouseY);
         }
-        if (c == 'z') {
+        if (c == 'z' && godMode) {
             PApplet.print("new Blocks[][] {");
             for (int i = 0; i < level.length; i++) {
                 PApplet.print("new Blocks[] {");
@@ -107,7 +109,7 @@ public class Game {
             }
             PApplet.print("}");
         }
-        if (c == 'x') {
+        if (c == 'x' && godMode) {
             PApplet.print("new Blocks[][] {");
             for (int i = 0; i < 38; i++) {
                 PApplet.print("new Blocks[] {");
@@ -127,7 +129,7 @@ public class Game {
     void draw() {
         app.image(background, 0, 0, app.width, app.height);
         app.image(app.loadImage(cursorType().getName() + ".png"), app.width - 50, app.height - 50, 50, 50);
-        String cursorName = cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
+        String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
         EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
         for (int y = 0; y < 21 && y < level.length; y++) {
             for (int x = 0; x < 38 && x < level[y].length; x++) {
@@ -152,10 +154,9 @@ public class Game {
         app.stroke(0);
         app.fill(0, 0, 0, 0);
         app.rect(xa, ya, 50, 50);
-        if (app.mousePressed && !nonce) {
+        if (app.mousePressed && !nonce && godMode) {
             if (app.mouseButton == PApplet.RIGHT) {
                 cursorType += 1;
-                PApplet.print("q");
             } else {
                 ya = Util.gridY(app.mouseY);
                 xa = Util.gridX(app.mouseX);

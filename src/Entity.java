@@ -8,8 +8,10 @@ public class Entity {
 
     Blocks[][] cur_level;
 
-    public Entity(Blocks[][] level) {
-        this.cur_level = level;
+    public Entity(Level l) {
+        this.cur_level = l.getLevel();
+        entityX = l.getSpawnX();
+        entityY = l.getSpawnY();
     }
 
     public int entityX = 0;

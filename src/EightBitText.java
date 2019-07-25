@@ -47,8 +47,9 @@ public class EightBitText {
         Letters.put("7", app.loadImage("8bit7.png"));
         Letters.put("8", app.loadImage("8bit8.png"));
         Letters.put("9", app.loadImage("8bit9.png"));
-        Letters.put("©", app.loadImage("8bitCopyright.png"));
-        Letters.put("×", app.loadImage("8bitCross.png"));
+        Letters.put("copy", app.loadImage("8bitCopyright.png"));
+        Letters.put("cross", app.loadImage("8bitCross.png"));
+        Letters.put("*", app.loadImage("8bitCross.png"));
         Letters.put("!", app.loadImage("8bitExclamationMark.png"));
         Letters.put("-", app.loadImage("8bitMinusSign.png"));
     }
@@ -56,9 +57,39 @@ public class EightBitText {
     //Methods
     public PImage[] eBitTxt(String letters) {
         letters = letters.toUpperCase();
-        PImage[] PIm = new PImage[letters.length()];
+        int len = 0;
         for (int i = 0; i < letters.length(); i++) {
-            PIm[i] = this.printLetter(letters.charAt(i));
+            if (letters.charAt(i) == '\b') {
+                len++;
+                i += 4;
+                continue;
+            }
+            len++;
+        }
+        PImage[] PIm = new PImage[len];
+        int idx = 0;
+        for (int i = 0; i < letters.length(); i++, idx++) {
+            if (letters.charAt(i) == '\b') {
+                String s = letters.charAt(i + 1) + "" + letters.charAt(i + 2) + letters.charAt(i + 3) + "" + letters.charAt(i + 4);
+                i += 4;
+                switch (s) {
+                    case "COPY":
+                    PIm[idx] = Letters.get("copy");
+                    break;
+                    case "EXCL":
+                    PIm[idx] = Letters.get("!");
+                    break;
+                    case "CROS":
+                    PIm[idx] = Letters.get("cross");
+                    break;
+                    default:
+                    PIm[idx] = this.printLetter('!');
+                    break;
+                }
+                continue;
+            }
+        
+            PIm[idx] = this.printLetter(letters.charAt(i));
         }
         return PIm;
     }
