@@ -57,7 +57,7 @@ public class Game {
                 "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
         Level l = Level.DEFAULT;
-        level = l.getLevel();
+        Util.level = l.getLevel();
 
         player = new Player(l);
         e = new Enemy(l, player);
@@ -65,7 +65,6 @@ public class Game {
         e.init(app);
         app.frameRate(60);
         Util.app = app;
-        Util.level = level;
     }
 
     void keyup(char c) {
@@ -89,7 +88,7 @@ public class Game {
             player.entityY = app.mouseY;
         }
         if (c == 'r') {
-            level = Level.DEFAULT.getLevel();
+            Util.level = Level.DEFAULT.getLevel();
             player.entityX = Level.DEFAULT.getSpawnX();
             player.entityY = Level.DEFAULT.getSpawnY();
         }
@@ -98,15 +97,15 @@ public class Game {
         }
         if (c == 'z' && godMode) {
             PApplet.print("new Blocks[][] {");
-            for (int i = 0; i < level.length; i++) {
+            for (int i = 0; i < Util.level.length; i++) {
                 PApplet.print("new Blocks[] {");
-                for (int j = 0; j < level[i].length; j++) {
-                    PApplet.print(level[i][j]);
-                    if (j + 1 != level[i].length)
+                for (int j = 0; j < Util.level[i].length; j++) {
+                    PApplet.print(Util.level[i][j]);
+                    if (j + 1 != Util.level[i].length)
                         PApplet.print(",");
                 }
                 PApplet.print("}");
-                if (i + 1 != level.length)
+                if (i + 1 != Util.level.length)
                     PApplet.print(",");
             }
             PApplet.print("}");
@@ -141,17 +140,17 @@ public class Game {
             String cursorName = String.valueOf(app.mouseX) + "\bcros" + String.valueOf(app.mouseY) +  "  " + cursorType().getName().replaceAll("([A-Z])", " $1").toUpperCase();
             EightBitText.text(cursorName, app.width - (16 * cursorName.length()) - 50, app.height - 35, 15);
         }
-        for (int y = 0; y < 21 && y < level.length; y++) {
-            for (int x = 0; x < 38 && x < level[y].length; x++) {
-                if (level[y][x] != Blocks.AIR && level[y][x] == Blocks.DIRT) {
-                    boolean isTop = (y - 1 < 0) || level[y - 1][x] == Blocks.AIR;
-                    boolean isBottom = (y + 1 >= level.length) || level[y + 1][x] == Blocks.AIR;
-                    boolean isLeft = (x - 1 < 0) || level[y][x - 1] == Blocks.AIR;
-                    boolean isRight = (x + 1 >= level[y].length) || level[y][x + 1] == Blocks.AIR;
+        for (int y = 0; y < 21 && y < Util.level.length; y++) {
+            for (int x = 0; x < 38 && x < Util.level[y].length; x++) {
+                if (Util.level[y][x] != Blocks.AIR && Util.level[y][x] == Blocks.DIRT) {
+                    boolean isTop = (y - 1 < 0) || Util.level[y - 1][x] == Blocks.AIR;
+                    boolean isBottom = (y + 1 >= Util.level.length) || Util.level[y + 1][x] == Blocks.AIR;
+                    boolean isLeft = (x - 1 < 0) || Util.level[y][x - 1] == Blocks.AIR;
+                    boolean isRight = (x + 1 >= Util.level[y].length) || Util.level[y][x + 1] == Blocks.AIR;
                     String nm = Blocks.DIRT.getNameForDirt(isBottom, isLeft, isRight, isTop);
                     drawBlock(nm, x, y);
-                } else if (level[y][x] != Blocks.AIR) {
-                    drawBlock(level[y][x].getName(), x, y);
+                } else if (Util.level[y][x] != Blocks.AIR) {
+                    drawBlock(Util.level[y][x].getName(), x, y);
                 }
             }
         }
@@ -171,8 +170,8 @@ public class Game {
             } else {
                 ya = Util.gridY(app.mouseY);
                 xa = Util.gridX(app.mouseX);
-                if (ya >= 0 && ya < level.length && xa >= 0 && xa < level[ya].length)
-                    level[ya][xa] = level[ya][xa] == Blocks.AIR ? cursorType() : Blocks.AIR;
+                if (ya >= 0 && ya < Util.level.length && xa >= 0 && xa < Util.level[ya].length)
+                    Util.level[ya][xa] = Util.level[ya][xa] == Blocks.AIR ? cursorType() : Blocks.AIR;
             }
             nonce = true;
         } else
