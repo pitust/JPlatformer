@@ -14,6 +14,8 @@ public class Entity {
 
     public int entityX = 0;
     public int entityY = 0;
+    public int entityH = 0;
+    public int entityW = 0;
     public int velocityY = 0;
     public float velocityX = 0;
     public boolean onGround = false;

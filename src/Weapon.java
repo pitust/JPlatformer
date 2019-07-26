@@ -1,3 +1,4 @@
+import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Weapon {
@@ -15,7 +16,7 @@ public class Weapon {
         //this.Wsound = sound;
     }
     //Methods
-    public void attack(Entity target, Entity owner)
+    public void attack(Entity target, Entity owner, PApplet app)
     {
         if(type == "sword")
         {
@@ -26,11 +27,14 @@ public class Weapon {
         }
         else if(type == "pistol")
         {
-            Bullet bill = new Bullet(owner.entityX + 51, owner.entityY,15, "Normal", damage);
+            if(owner.entityY > target.entityY && target.entityY > owner.entityY - owner.entityH || target.entityY > owner.entityY && owner.entityY > target.entityY - target.entityH)
+            {
+                target.entityHP = target.entityHP - this.damage;
+            }
         }
         else if(type == "rocketLauncher")
         {
-            Bullet bill = new Bullet(owner.entityX + 51, owner.entityY,20, "Rocket", damage);
+            Missile bill = new Missile(owner.entityX + 51, owner.entityY,20, "Rocket", damage, app);
         }
     }
 }
