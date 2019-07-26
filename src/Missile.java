@@ -33,11 +33,4 @@ public class Missile {
         this.currentImg ++;
         this.Speed = this.Speed*currentImg;
     }
-    public void checkCollision(Entity target)
-    {
-        if(this.posX <= target.entityX && this.posX >= target.entityX + target.entityH && target.entityY >= this.posY )
-        {
-
-        }
-    }
 }
