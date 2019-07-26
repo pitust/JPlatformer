@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public enum Level {
 
     ELEVATORTEST,
@@ -23,6 +25,24 @@ public enum Level {
                 return defaultLevel.getSpawnX();
             default:
                 return NOTHING.getSpawnX();
+        }
+    }
+    public Portal[] portals() {
+        switch (this) {
+            case JUMPNRUNTEST1:
+                return new Portal[]{};
+            case ELEVATORTEST:
+                return new Portal[]{};
+            case NOTHING:
+                return new Portal[]{};
+            case JUMPNRUNTEST2:
+                return new Portal[]{};
+            case BUGS:
+                return new Portal[]{};
+            case DEFAULT:
+                return defaultLevel.portals();
+            default:
+                return NOTHING.portals();
         }
     }
 

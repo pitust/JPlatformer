@@ -1,5 +1,5 @@
-CLASSES := out/Blocks.class out/Util.class out/EightBitText.class out/Level.class out/Entity.class out/Player.class out/Enemy.class out/Frames.class out/Goal.class out/Game.class out/JPlatformer.class
-CLASSFILENAMES := JPlatformer.class out/Entity.class out/Player.class out/Enemy.class out/Util.class out/Blocks.class 'out/Blocks$$1.class' out/Frames.class out/EightBitText.class out/Goal.class out/Game.class out/Level.class 'out/Level$$1.class'
+CLASSES := out/Blocks.class out/Util.class out/EightBitText.class out/Level.class out/Entity.class out/Player.class out/Portal.class out/Enemy.class out/Frames.class out/Goal.class out/Game.class out/JPlatformer.class
+CLASSFILENAMES := JPlatformer.class out/Entity.class out/Player.class out/Enemy.class out/Util.class out/Blocks.class out/Portal.class 'out/Blocks$$1.class' out/Frames.class out/EightBitText.class out/Goal.class out/Game.class out/Level.class 'out/Level$$1.class'
 build: JPlatformer.jar
 
 main.jar: $(CLASSES)

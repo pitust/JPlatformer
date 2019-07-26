@@ -10,7 +10,7 @@ public class Game {
     PImage facingLeft;
     PImage facingRight;
     Player player;
-    Frames portal;
+    Portal portal;
     EightBitText EBT;
 
     public Game(PApplet app) {
@@ -53,15 +53,15 @@ public class Game {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
         facingRight = app.loadImage("playerRight.png");
-        portal = new Frames(app, new String[] { "portal0.png", "portal1.png", "portal2.png", "portal3.png",
-                "portal4.png", "portal5.png" });
         // Auto-gen, use <Z>export
         Level l = Level.DEFAULT;
         Util.level = l.getLevel();
 
         player = new Player(l);
+        portal = new Portal(100, 150, 300, 150, player);
         e = new Enemy(l, player);
         player.init(app);
+        portal.init(app);
         e.init(app);
         app.frameRate(60);
         Util.app = app;
@@ -86,6 +86,10 @@ public class Game {
         if (c == 'q' && godMode) {
             player.entityX = app.mouseX;
             player.entityY = app.mouseY;
+        }
+        if (c == 'c' && godMode) {
+            portal.xA = Util.globX(Util.gridX(app.mouseX));
+            portal.yA = Util.globY(Util.gridY(app.mouseY));
         }
         if (c == 'r') {
             Util.level = Level.DEFAULT.getLevel();
@@ -158,6 +162,7 @@ public class Game {
         EightBitText.text("Use WAD keys to move", 20, 20, 10);
 
         player.draw(app);
+        portal.draw(app);
         e.draw(app);
         int xa = Util.globX(Util.gridX(app.mouseX));
         int ya = Util.globY(Util.gridY(app.mouseY));
