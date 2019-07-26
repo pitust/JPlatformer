@@ -25,6 +25,9 @@ public class Player extends Entity {
         } else {
             app.image(facingRight, entityX, entityY - 70, 50, 70);
         }
+        if (Game.godMode) {
+            showRange(app);
+        }
     }
 
     public boolean isAPressed = false;
