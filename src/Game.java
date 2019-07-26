@@ -1,6 +1,6 @@
 import processing.core.*;
 
-import processing.sound.*;
+import java.io.File;
 
 /**
  * Game
@@ -13,7 +13,9 @@ public class Game {
     PImage facingRight;
     Player player;
     Portal portal;
+    Goal flag;
     boolean player_won;
+    File BgMusic;
     EightBitText EBT;
 
     public Game(PApplet app) {
@@ -53,14 +55,17 @@ public class Game {
                 return Blocks.DIRT;
         }
     }
-
-    SoundFile BgMusic;
     Enemy e;
 
     public void setup() {
         background = app.loadImage("bg.png");
         facingLeft = app.loadImage("playerLeft.png");
         facingRight = app.loadImage("playerRight.png");
+        //Just try to find a way to make the sound work
+        BgMusic = new File("data/Background_basic_music.wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(BgMusic);
+        AudioFormat format = audioStream.getFormat();
+        DataLine.Info info = new DataLine.Info(Clip.class, format);
         // Auto-gen, use <Z>export
         Level l = Level.DEFAULT;
         Util.level = l.getLevel();
@@ -75,12 +80,6 @@ public class Game {
         Util.app = app;
         Util.level = level;
         player_won = false;
-        size(640, 360);
-        background(255);
-
-        // Load a soundfile from the /data folder of the sketch and play it back
-        BgMusic = new SoundFile(this, "Background_basic_music.wav");
-        BgMusic.play();
     }
 
     void keyup(char c) {

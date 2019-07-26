@@ -17,6 +17,7 @@ public class Entity {
     public int velocityY = 0;
     public float velocityX = 0;
     public boolean onGround = false;
+    public int entityHP;
 
     public void init(PApplet app) {
 
