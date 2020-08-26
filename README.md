@@ -6,3 +6,6 @@ This platformer uses processing.
 - booky10 (Assets)
 - Darkhell66659 (Level designer, platform type inventor, programmer, texture finder)
 - Herguent (Level designer)
+
+
+Stolen token for discord to kill: NzA1ODYzNzMyODE4ODcwMzAy.Xrp07A.0lje2LVRFUSWNN8qzvcqYUlyNwY
