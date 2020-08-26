@@ -8,4 +8,3 @@ This platformer uses processing.
 - Herguent (Level designer)
 
 
-Stolen token for discord to kill: NzA1ODYzNzMyODE4ODcwMzAy.Xrp07A.0lje2LVRFUSWNN8qzvcqYUlyNwY
